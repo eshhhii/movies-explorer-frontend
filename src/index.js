@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
-import AboutProject from "./components/AboutProject/AboutProject";
+import Techs from "./components/Techs/Techs";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AboutProject />
+      <Techs />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
