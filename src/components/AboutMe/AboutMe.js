@@ -12,21 +12,31 @@ function AboutMe() {
           <h2 className="about__title"> Эмма</h2>
           <p className="about__subtitle">Фронтенд-разработчик, 27 лет</p>
           <p className="about__description">
-            Я родился и живу в Саратове, закончил факультет экономики СГУ. У
-            меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
-            бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ
-            Контур». После того, как прошёл курс по веб-разработке, начал
-            заниматься фриланс-заказами и ушёл с постоянной работы.
+            Я живу в Калининграде, закончила факультет финансового менеджмента.
+            Я люблю слушать музыку и смотреть сериалы, а ещё увлекаюсь бегом.
+            Недавно начала кодить. С 2016 года работаю в сфере автомобильного
+            бизнеса. После того, как пройду курс по веб-разработке, планирую
+            уйти работать в новую сферу и уволиться с работы.
           </p>
           <ul className="about__list">
             <li className="about__item">
-              <a className="about__link" target="_blank" rel="noreferrer">
-                ссылка
+              <a
+                className="about__link"
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.facebook.com"
+              >
+                Facebook
               </a>
             </li>
             <li className="about__item">
-              <a className="about__link" target="_blank" rel="noreferrer">
-                ссылка
+              <a
+                className="about__link"
+                target="_blank"
+                rel="noreferrer"
+                href="https://github.com/eshhhii"
+              >
+                GitHub
               </a>
             </li>
           </ul>

@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
-import Footer from "./components/Footer/Footer";
 import reportWebVitals from "./reportWebVitals";
+import Navigation from "./components/Navigation/Navigation";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Footer />
+      <Navigation />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

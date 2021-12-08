@@ -1,20 +1,18 @@
 .promo {
   background-color: #f5f5f5;
-  max-width: 1200px;
+  max-width: 1280px;
   display: flex;
-  justify-content: space-between;
+  width: 100%;
   flex-direction: column;
-  margin: 20px 40px 0 40px;
+  margin: 28px 40px 0 40px;
 }
 
 .promo__title {
-  color: black;
-  font-family: Inter;
+  max-width: 730px;
   font-style: normal;
   font-weight: normal;
   font-size: 50px;
   line-height: 58px;
-  max-width: 730px;
   text-align: center;
-  padding: 160px 235px 217px;
+  margin: 142px auto 151px;
 }

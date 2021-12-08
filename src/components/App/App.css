@@ -1,23 +1,8 @@
-.page {
+.app {
+  max-width: 1280px;
+  min-width: 320px;
   font-family: "Inter", Arial, sans-serif;
   background-color: #ffffff;
   color: #000000;
-  margin: 0 auto;
-}
-
-.page__container {
-  max-width: 1280px;
-  min-width: 320px;
-  width: 100%;
-  min-height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.page__content {
-  width: calc(100% - 140px);
   margin: 0 auto;
 }

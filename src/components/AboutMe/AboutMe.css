@@ -49,6 +49,7 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
+  color: #000000;
 }
 .about__link:hover {
   opacity: 0.7;
