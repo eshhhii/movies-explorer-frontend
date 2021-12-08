@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import Navigation from "./components/Navigation/Navigation";
+import NotFound from "./components/NotFound/NotFound";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Navigation />
+      <NotFound />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,4 +1,5 @@
 .nav {
+  margin-top: 21px;
 }
 .nav__menu {
   display: flex;
@@ -11,6 +12,10 @@
   font-size: 12px;
   line-height: 16px;
 }
+.nav__link:hover {
+  opacity: 0.8;
+}
+
 .nav__signup {
   margin-right: 30px;
   text-decoration: none;
@@ -25,7 +30,4 @@
   border-radius: 3px;
   align-items: center;
   text-decoration: none;
-}
-.nav__link:hover {
-  opacity: 0.8;
 }
