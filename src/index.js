@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
-import Portfolio from "./components/Portfolio/Portfolio";
+import Footer from "./components/Footer/Footer";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Portfolio />
+      <Footer />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
