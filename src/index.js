@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import NotFound from "./components/NotFound/NotFound";
+import Preloader from "./components/Preloader/Preloader";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <NotFound />
+      <Preloader />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
