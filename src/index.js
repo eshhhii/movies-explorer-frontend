@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import Preloader from "./components/Preloader/Preloader";
+import FilterCheckbox from "./components/FilterCheckbox/FilterCheckbox";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Preloader />
+      <FilterCheckbox />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
