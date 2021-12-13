@@ -1,0 +1,70 @@
+.footer-button {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 396px;
+}
+.footer-button_register {
+  margin: 69px auto 0;
+}
+
+.footer-button_login {
+  margin: 179px auto 0;
+}
+
+.footer-button__button {
+  width: 100%;
+  background: #000000;
+  border-radius: 3px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 13px 0 15px;
+  border: none;
+  outline: none;
+}
+
+.footer-button__button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.footer-button__paragraph {
+  color: #a0a0a0;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0;
+  text-align: center;
+}
+
+.footer-button__link {
+  color: #000000;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0 0 0 6px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.footer-button__link:hover {
+  opacity: 0.8;
+}
+
+.footer-button__redirect {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 70px;
+}
+
+.footer-button__redirect_login {
+  margin-top: 16px;
+}
+
+.footer-button__redirect_register {
+  margin-top: 9px;
+}

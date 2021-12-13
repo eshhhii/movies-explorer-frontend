@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import SearchForm from "./components/SearchForm/SearchForm";
+import App from "./components/App/App";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <SearchForm />
+      <App />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
