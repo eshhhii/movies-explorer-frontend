@@ -10,13 +10,13 @@ function FilterCheckbox({ handleToggle }) {
 
   return (
     <div className="checkbox">
-     <input
+      <label className="checkbox__label">
+        <input
           className="checkbox__input"
           type="checkbox"
           checked={isChecked}
           onChange={(e) => onChange(e)}
         />
-      <label className="checkbox__label">
         <span className="checkbox__slider" />
       </label>
       <p className="checkbox__text">Короткометражки</p>

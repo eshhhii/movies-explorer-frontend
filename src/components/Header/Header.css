@@ -5,6 +5,9 @@
   justify-content: space-between;
 }
 
+.header__logo_link {
+  display: flex;
+}
 .header__logo {
   max-width: 38px;
   margin-top: 18px;
