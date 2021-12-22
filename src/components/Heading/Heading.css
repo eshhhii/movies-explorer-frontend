@@ -9,3 +9,16 @@
   border-bottom: 1px solid;
   padding-bottom: 23px;
 }
+
+@media all and (max-width: 700px) {
+  .heading {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+@media all and (max-width: 610px) {
+  .heading {
+    padding-bottom: 28px;
+  }
+}

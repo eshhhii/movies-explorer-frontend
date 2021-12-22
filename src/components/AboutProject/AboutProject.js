@@ -4,7 +4,7 @@ import Heading from "../Heading/Heading";
 
 function AboutProject() {
   return (
-    <section className="project">
+    <section className="project" id="aboutProject">
       <Heading heading="О проекте" />
       <ul className="project__list">
         <li className="project__item">

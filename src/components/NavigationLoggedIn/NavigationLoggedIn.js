@@ -1,34 +1,34 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./NavigationLoggedIn.css";
-import menuBurger from "../../images/burger-menu.svg";
-import close from "../../images/close.svg";
 
 function NavigationLoggedIn() {
   const [menu, setMenu] = useState(false);
   const toggleMenu = () => setMenu(!menu);
+
   return (
-    <nav className="burger">
-      <button className="burger__button" type="button" onClick={toggleMenu}>
-        <img className="burger__image" src={menuBurger} alt="" />
-      </button>
+    <nav className="nav-log">
+      <button
+        className="nav-log__burger-btn"
+        type="button"
+        onClick={toggleMenu}
+      ></button>
 
       <div
-        className={`burger__container ${
-          menu ? "burger__container_visible" : ""
+        className={`nav-log__container ${
+          menu ? "nav-log__container_visible" : ""
         }`}
       >
         <div
-          className={`burger__burger ${menu ? "burger__burger_visible" : ""}`}
+          className={`nav-log__burger ${menu ? "nav-log__burger_visible" : ""}`}
         >
-          <div className="nav-log__menu_container">
+          <div className="nav-log__menu-container">
             <button
               className="nav-log__close"
               type="button"
               onClick={toggleMenu}
-            >
-              <img className="nav-log__image" src={close} alt="" />
-            </button>
+            ></button>
+
             <ul className="nav-log__menu">
               <li className="nav-log__item nav-log__item_main ">
                 <Link to="/" className="nav-log__link">
@@ -55,11 +55,7 @@ function NavigationLoggedIn() {
               </li>
             </ul>
           </div>
-          <NavLink
-            to="/profile"
-            className="nav-log__link nav-log__link_profile"
-            activeClassName="nav-log__link_active"
-          >
+          <NavLink to="/profile" className="nav-log__profile-btn">
             Аккаунт
           </NavLink>
         </div>

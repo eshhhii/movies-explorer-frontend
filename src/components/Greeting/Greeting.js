@@ -1,17 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import "./Greeting.css";
-import Logo from "../../images/logo.svg";
+import Logo from "../Logo/Logo";
 
 function Greeting({ text, loggedIn, name }) {
   return (
     <div className={`greeting ${name === "profile" ? "greeting_profile" : ""}`}>
-      {!loggedIn && (
-        <Link to="/" className="greeting__link">
-          <img className="greeting__logo" src={Logo} alt="Лого"></img>
-        </Link>
-      )}
+      {!loggedIn && <Logo />}
       <h1
         className={`greeting__text ${
           name === "profile" ? "greeting__text_profile" : ""

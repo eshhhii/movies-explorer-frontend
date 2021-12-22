@@ -4,7 +4,7 @@ import Heading from "../Heading/Heading";
 
 function Techs() {
   return (
-    <section className="techs">
+    <section className="techs" id="techs">
       <Heading heading="Технологии" />
       <div className="techs__container">
         <h2 className="techs__title"> 7 технологий</h2>

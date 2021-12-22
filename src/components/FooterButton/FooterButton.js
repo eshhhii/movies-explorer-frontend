@@ -18,7 +18,7 @@ function FooterButton({ buttonText, paragraph, linkText, href, name }) {
         }  ${name === "register" ? "footer-button__redirect_register" : ""}`}
       >
         <p className="footer-button__paragraph">{paragraph}</p>
-        <Link to="" element={href} className="footer-button__link">
+        <Link to={href} className="footer-button__link">
           {linkText}
         </Link>
       </div>

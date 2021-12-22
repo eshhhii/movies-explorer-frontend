@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -14,35 +14,36 @@ import Footer from "../Footer/Footer";
 function App() {
   return (
     <div className="app">
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={<Header loggedIn={false} />}
-          element={<Main />}
-          element={<Footer />}
-        ></Route>
-        <Route
-          path="/movies"
-          element={<Header />}
-          element={<Movies />}
-          element={<Footer />}
-        ></Route>
-        <Route
-          path="/saved-movies"
-          element={<Header loggedIn={true} />}
-          element={<SavedMovies />}
-          element={<Footer />}
-        ></Route>
-        <Route path="/signup" element={<Register />}></Route>
-        <Route path="/signin" element={<Login />}></Route>
-        <Route
-          path="/profile"
-          element={<Header loggedIn={true} />}
-          element={<Profile />}
-        ></Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
+      <Switch>
+        <Route exact path="/">
+          <Header loggedIn={false} />
+          <Main />
+          <Footer />
+        </Route>
+        <Route path="/movies">
+          <Header loggedIn={true} />
+          <Movies />
+          <Footer />
+        </Route>
+        <Route path="/saved-movies">
+          <Header loggedIn={true} />
+          <SavedMovies />
+          <Footer />
+        </Route>
+        <Route path="/signup">
+          <Register />
+        </Route>
+        <Route path="/signin">
+          <Login />
+        </Route>
+        <Route path="/profile">
+          <Header loggedIn={true} />
+          <Profile />
+        </Route>
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Switch>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 .not-found {
   text-align: center;
-  padding: 246px 440px 60px;
+  padding: 246px 0 60px;
   min-height: 100vh;
   box-sizing: border-box;
   display: flex;
@@ -32,4 +32,33 @@
   margin-top: 184px;
   text-decoration: none;
   color: black;
+}
+
+@media (max-width: 768px) {
+  .not-found {
+    padding: 408px 0 222px;
+  }
+}
+
+@media (max-width: 450px) {
+  .not-found {
+    padding: 329px 0 30px;
+  }
+
+  .not-found__title {
+    font-size: 80px;
+    line-height: 97px;
+  }
+
+  .not-found__subtitle {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 10px;
+  }
+
+  .not-found__link {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 284px;
+  }
 }

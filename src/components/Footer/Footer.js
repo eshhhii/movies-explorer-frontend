@@ -14,7 +14,6 @@ function Footer() {
             <li className="footer__item">
               <a
                 className="footer__link"
-                className="footer__link"
                 href="https://praktikum.yandex.ru/"
                 target="_blank"
                 rel="noreferrer"
@@ -25,7 +24,6 @@ function Footer() {
             <li className="footer__item">
               <a
                 className="footer__link"
-                className="footer__link"
                 href="https://github.com/yandex-praktikum"
                 target="_blank"
                 rel="noreferrer"
@@ -35,7 +33,6 @@ function Footer() {
             </li>
             <li className="footer__item">
               <a
-                className="footer__link"
                 className="footer__link"
                 href="https://www.facebook.com/yandex.praktikum"
                 target="_blank"

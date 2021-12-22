@@ -14,14 +14,6 @@
   width: 100%;
 }
 
-.login__title {
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
-  margin: 40px 0 40px;
-  padding: 0;
-}
-
 .login__form {
   width: 100%;
   display: flex;
@@ -61,4 +53,24 @@
 
 .login__field_email {
   font-weight: 500;
+}
+
+@media all and(max-width: 768px) {
+  .login {
+    margin: 232px auto 0;
+  }
+}
+
+@media all and (max-width: 450px) {
+  .login {
+    margin: 56px 30px 30px;
+  }
+  .login__block {
+    max-width: 260px;
+    align-content: center;
+  }
+  .login__form {
+    max-width: 260px;
+    align-content: center;
+  }
 }

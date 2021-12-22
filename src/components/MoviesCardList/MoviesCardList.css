@@ -1,35 +1,50 @@
-.movies-cards {
-    padding: 70px 70px 50px;
+.list {
+  margin: 70px 70px 30px;
 }
 
-.movies-cards__list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 60px 30px;
-    padding: 0;
-    margin: 0;
+.list__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-.movies-cards__button-container {
-    padding: 50px 0 30px;
-}
-  
-.movies-cards__button {
-    background: #F9F9F9;
-    border-radius: 6px;
-    width: 100%;
-    color: #000000;
-    font-family: 'Inter', Arial, Helvetica, sans-serif;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    padding: 11px 0 9px 0;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
+.list__container {
+  display: flex;
+  margin: 50px auto 80px;
+  justify-content: center;
 }
 
-.movies-cards__button:hover {
-    opacity: 0.8;
+.list__button {
+  background-color: #ffffff;
+  width: 320px;
+  height: 36px;
+  color: #000000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 11px auto;
+  border: 1px solid #e8e8e8;
+  cursor: pointer;
+}
+
+.list__button:hover {
+  opacity: 0.8;
+}
+
+@media all and (max-width: 770px) {
+  .list {
+    margin: 60px 30px 30px;
+  }
+}
+
+@media all and (max-width: 550px) {
+  .list {
+    margin: 40px 10px 20px;
+  }
+  .list__button {
+    width: 240px;
+  }
 }

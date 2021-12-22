@@ -3,42 +3,42 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 import Preloader from "../Preloader/Preloader";
 
-function MoviesCardList ({ cards, pageSavedMovies, buttonMore }) {
+function MoviesCardList({ cards, savedMoviePage, moreBtn }) {
+  const [isLoading, setLoading] = useState(false);
+  const handlePreloader = () => {
+    setLoading(true);
+  };
 
-    const [isLoading, setLoading] = useState(false);
-    const handlePreloader = () => { setLoading(true) };
+  return (
+    <section className="list">
+      <ul className="list__list">
+        {cards.slice(0, 7).map((card) => (
+          <MoviesCard
+            key={card.id}
+            card={card}
+            pageSavedMovies={savedMoviePage}
+          />
+        ))}
+      </ul>
 
-    return (
-        <section className="moviescards">
-            <ul className="moviescards__list">
-                {cards.map((card) => (
-                    <MoviesCard
-                        key={card.id}
-                        card={card}
-                        pageSavedMovies={pageSavedMovies}
-                    />
-                ))}
-            </ul>
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        moreBtn && (
+          <div className="list__container">
+            <button
+              className="list__button"
+              type="button"
+              name="more"
+              onClick={handlePreloader}
+            >
+              Ещё
+            </button>
+          </div>
+        )
+      )}
+    </section>
+  );
+}
 
-            {isLoading ? (<Preloader />) :
-                (
-                    buttonMore &&
-                    (
-                        <div className="moviescards__button_container">
-                            <button
-                                className="moviescards__button"
-                                type="button"
-                                name="more"
-                                onClick={handlePreloader}
-                            >
-                                Ещё
-                            </button>
-                        </div>
-                    )
-                )}
-
-        </section>
-    );
-};
-
-export default MoviesCardList; 
+export default MoviesCardList;
