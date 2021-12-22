@@ -48,6 +48,7 @@ function Register({ onRegister }) {
           className="register__field register__field_email"
           name="email"
           type="email"
+          pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
           required
           autoComplete="off"
           onSubmit={handleEmailChange}
@@ -58,6 +59,7 @@ function Register({ onRegister }) {
           className="register__field register__field_password"
           name="password"
           type="password"
+          minLength="6"
           required
           autoComplete="off"
           onSubmit={handlePasswordChange}

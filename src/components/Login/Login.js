@@ -32,6 +32,7 @@ function Login({ onLogin }) {
           className="login__field login__field_email"
           name="email"
           type="email"
+          pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
           required
           autoComplete="off"
           onSubmit={handleEmailSubmit}
@@ -42,6 +43,7 @@ function Login({ onLogin }) {
           className="login__field login__field_password"
           name="password"
           type="password"
+          minLength="6"
           required
           autoComplete="off"
           onSubmit={handlePasswordSubmit}

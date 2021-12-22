@@ -14,7 +14,7 @@ function Profile() {
   }
   return (
     <section className="profile">
-      <h2 className="profile__title">Привет, Эмма!</h2>
+      <h2 className="profile__title">Привет, {name}!</h2>
       <form className="profile__form">
         <div className="profile__wrapper">
           <span className="profile__name">Имя</span>
@@ -36,7 +36,7 @@ function Profile() {
             className="profile__input_email"
             name="email"
             type="email"
-            value="eshhhii@gmail.com"
+            value={email}
             onChange={handleEmailChange}
             pattern="^[А-Яа-яЁёA-Za-z]+-? ?[А-Яа-яЁёA-Za-z]+$"
             autoComplete="off"
