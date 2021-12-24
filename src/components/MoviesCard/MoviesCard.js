@@ -13,7 +13,7 @@ function MoviesCard({ card }) {
   }
 
   function handleMovieDelete(evt) {
-    evt.target.closest(".moviecard").remove();
+    evt.target.closest(".moviescard").remove();
   }
 
   return (

@@ -35,10 +35,6 @@
   margin-top: 0;
 }
 
-.login__field_password {
-  color: #ee3465;
-}
-
 .login__field {
   border: none;
   border-bottom: 1px solid #e8e8e8;
@@ -50,12 +46,14 @@
   outline: none;
   box-sizing: border-box;
 }
-
 .login__field_email {
   font-weight: 500;
 }
+.login__field_password {
+  color: #ee3465;
+}
 
-@media all and(max-width: 768px) {
+@media all and (max-width: 768px) {
   .login {
     margin: 232px auto 0;
   }

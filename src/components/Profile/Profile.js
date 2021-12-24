@@ -36,7 +36,7 @@ function Profile() {
             className="profile__input_email"
             name="email"
             type="email"
-            value="eshhii@mail.ru"
+            value={email}
             onChange={handleEmailChange}
             pattern="^[А-Яа-яЁёA-Za-z]+-? ?[А-Яа-яЁёA-Za-z]+$"
             autoComplete="off"

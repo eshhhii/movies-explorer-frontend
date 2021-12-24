@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./Greeting.css";
 import Logo from "../Logo/Logo";
 

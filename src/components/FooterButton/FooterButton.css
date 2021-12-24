@@ -48,11 +48,9 @@
   text-align: center;
   text-decoration: none;
 }
-
 .footer-button__link:hover {
   opacity: 0.8;
 }
-
 .footer-button__redirect {
   margin-top: 16px;
   display: flex;
@@ -60,11 +58,9 @@
   justify-content: center;
   margin-bottom: 70px;
 }
-
 .footer-button__redirect_login {
   margin-top: 16px;
 }
-
 .footer-button__redirect_register {
   margin-top: 9px;
 }
@@ -72,7 +68,6 @@
   .footer-button_register {
     margin: 69px auto 0;
   }
-
   .footer-button_login {
     margin: 179px auto 0;
   }
@@ -96,12 +91,10 @@
   .footer-button__redirect {
     margin-bottom: 232px;
   }
-
   .footer-button__paragraph {
     font-size: 12px;
     line-height: 15px;
   }
-
   .footer-button__link {
     font-size: 12px;
     line-height: 15px;
@@ -113,7 +106,6 @@
   .footer-button__redirect_login {
     margin-top: 14px;
   }
-
   .footer-button__redirect_register {
     margin-top: 14px;
   }
