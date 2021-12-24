@@ -1,6 +1,6 @@
 import React from "react";
 import "./MoviesCard.css";
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 
 function MoviesCard({ card }) {
   const [isMovieSaved, setIsMovieSaved] = React.useState(false);
