@@ -31,6 +31,10 @@
   outline: none;
   margin-right: 10px;
 }
+.search__input:focus-within {
+  transform: scale(1.01);
+  border: 1.5px solid #e8e8e8;
+}
 
 .search__button {
   background-color: #000000;

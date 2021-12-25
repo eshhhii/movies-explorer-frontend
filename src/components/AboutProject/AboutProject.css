@@ -38,7 +38,7 @@
 .project__timeline {
   list-style: none;
   display: grid;
-  grid-template-columns: 228px 912px;
+  grid-template-columns: 20% 80%;
   box-sizing: border-box;
   height: 36px;
   padding: 0;
@@ -60,14 +60,15 @@
 }
 
 .project__time_color_grey {
-  background: #f2f2f2;
+  background-color: #f2f2f2;
 }
 .project__parts {
   list-style: none;
   display: grid;
-  grid-template-columns: 228px 912px;
+  grid-template-columns: 20% 80%;
   margin: 14px 0 0;
   padding: 0;
+  box-sizing: border-box;
 }
 .project__part {
   font-family: Inter;
