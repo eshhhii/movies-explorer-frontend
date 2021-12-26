@@ -85,10 +85,6 @@
     padding: 90px 50px;
   }
 
-  .project__timeline {
-    grid-template-columns: 140px 528px;
-  }
-
   .project__item:first-of-type {
     margin-right: 30px;
   }
@@ -99,7 +95,6 @@
     margin: 22px 0 0;
   }
   .project__parts {
-    grid-template-columns: 140px 528px;
     margin: 10px 0 0;
   }
 }
@@ -131,14 +126,13 @@
   .project__item:last-of-type {
     margin: 0 0 60px;
   }
-
   .project__timeline {
-    grid-template-columns: 100px 184px;
+    grid-template-columns: 35% 65%;
   }
 
   .project__parts {
-    grid-template-columns: 100px 184px;
     font-size: 11px;
     line-height: 13px;
+    grid-template-columns: 35% 65%;
   }
 }

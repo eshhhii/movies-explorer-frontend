@@ -109,4 +109,10 @@
   .footer-button__redirect_register {
     margin-top: 14px;
   }
+  .footer-button_register {
+    margin: 157px auto 0;
+  }
+  .footer-button_login {
+    margin: 267px auto 0;
+  }
 }
