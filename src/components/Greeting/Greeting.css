@@ -1,0 +1,33 @@
+.greeting {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+  width: 100%;
+}
+
+.greeting_profile {
+  padding: 0;
+}
+
+.greeting__text {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin-top: 40px;
+  text-align: start;
+}
+
+.greeting__text_profile {
+  text-align: center;
+}
+
+@media all and (max-width: 450px) {
+  .greeting {
+    padding-bottom: 80px;
+    align-items: center;
+  }
+  .greeting__text {
+    margin-top: 50px;
+    text-align: center;
+  }
+}

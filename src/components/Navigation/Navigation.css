@@ -1,0 +1,44 @@
+.nav__menu {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+.nav__link {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+.nav__link:hover {
+  opacity: 0.8;
+}
+
+.nav__signup {
+  margin-right: 30px;
+  text-decoration: none;
+  color: black;
+}
+.nav__signin {
+  width: 76px;
+  height: 32px;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 8px 20px;
+  border-radius: 3px;
+  align-items: center;
+  text-decoration: none;
+}
+
+@media all and (max-width: 450px) {
+  .nav__link {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .nav_signin {
+    margin: 0 0 0 14px;
+    padding: 5px 12px;
+    height: 26px;
+    width: 54px;
+  }
+}
