@@ -1,4 +1,4 @@
-class MainApi {
+class Api {
   constructor(config) {
     this._url = config.url;
     this._headers = config.headers;
@@ -15,14 +15,14 @@ class MainApi {
     }).then(this._checkResponse);
   }
 
-  editUserInfo(name, email) {
+  editUserInfo(email, name) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       credentials: "include",
       body: JSON.stringify({
-        name: name,
         email: email,
+        name: name,
       }),
     }).then(this._checkResponse);
   }
@@ -71,11 +71,11 @@ class MainApi {
   }
 }
 
-const api = new MainApi({
+const mainApi = new Api({
   url: "https://api.eshhhii-diploma.nomoredomains.rocks",
   headers: {
     "content-type": "application/json",
   },
 });
 
-export default api;
+export default mainApi;
