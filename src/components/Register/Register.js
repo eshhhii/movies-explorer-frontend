@@ -2,36 +2,24 @@ import React from "react";
 import "./Register.css";
 import Greeting from "../Greeting/Greeting";
 import FooterButton from "../FooterButton/FooterButton";
+import useValidation from "../../utils/validation";
 
 function Register({ onRegister }) {
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const loggedIn = false;
+  const { values, errors, isValid, handleChange } = useValidation();
 
-  function handleNameChange(e) {
-    setName(e.target.value);
-  }
-
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
-
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
-
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister(name, email, password);
-  }
+    onRegister(values.name, values.email, values.password);
+  };
 
   return (
     <section className="register">
       <div className="register__block">
-        <Greeting text="Добро пожаловать!" />
+        <Greeting text="Добро пожаловать!" loggedIn={loggedIn} />
       </div>
 
-      <form className="register__form" onSubmit={handleSubmit}>
+      <form className="register__form" onSubmit={handleSubmit} noValidate>
         <span className="register__input">Имя</span>
         <input
           className="register__field register__field_name"
@@ -40,7 +28,9 @@ function Register({ onRegister }) {
           autoComplete="off"
           minLength="2"
           maxLength="40"
-          onSubmit={handleNameChange}
+          onChange={handleChange}
+          value={values.name || ""}
+          error={errors.name}
           required
         ></input>
         <span className="register__input">E-mail</span>
@@ -51,7 +41,9 @@ function Register({ onRegister }) {
           pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
           required
           autoComplete="off"
-          onSubmit={handleEmailChange}
+          onChange={handleChange}
+          value={values.email || ""}
+          error={errors.email}
         ></input>
 
         <span className="register__input">Пароль</span>
@@ -62,9 +54,12 @@ function Register({ onRegister }) {
           minLength="6"
           required
           autoComplete="off"
-          onSubmit={handlePasswordChange}
+          onChange={handleChange}
+          value={values.password || ""}
+          error={errors.password}
         ></input>
         <FooterButton
+          disabledButton={!isValid}
           buttonText="Зарегистрироваться"
           paragraph="Уже зарегистрированы?"
           linkText="Войти"

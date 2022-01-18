@@ -4,7 +4,7 @@ import Greeting from "../Greeting/Greeting";
 import FooterButton from "../FooterButton/FooterButton";
 import useValidation from "../../utils/validation";
 
-function Login({ onLogin, disabled }) {
+function Login({ onLogin }) {
   const loggedIn = false;
   const { values, errors, isValid, handleChange } = useValidation();
 
@@ -29,7 +29,6 @@ function Login({ onLogin, disabled }) {
           required
           autoComplete="off"
           onChange={handleChange}
-          disabled={disabled}
           error={errors.email}
           value={values.email || ""}
         ></input>
@@ -43,7 +42,6 @@ function Login({ onLogin, disabled }) {
           required
           autoComplete="off"
           onChange={handleChange}
-          disabled={disabled}
           error={errors.password}
           value={values.password || ""}
         ></input>
