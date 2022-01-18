@@ -29,6 +29,14 @@
   opacity: 0.8;
   cursor: pointer;
 }
+.footer-button__button_disabled {
+  background-color: #f8f8f8;
+  border: 1px solid #a0a0a0;
+  color: #000000;
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
 
 .footer-button__paragraph {
   color: #a0a0a0;

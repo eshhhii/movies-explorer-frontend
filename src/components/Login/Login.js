@@ -2,31 +2,24 @@ import React from "react";
 import "./Login.css";
 import Greeting from "../Greeting/Greeting";
 import FooterButton from "../FooterButton/FooterButton";
+import useValidation from "../../utils/validation";
 
-function Login({ onLogin }) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-
-  function handleEmailSubmit(e) {
-    setEmail(e.target.value);
-  }
-
-  function handlePasswordSubmit(e) {
-    setPassword(e.target.value);
-  }
+function Login({ onLogin, disabled }) {
+  const loggedIn = false;
+  const { values, errors, isValid, handleChange } = useValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    onLogin(email, password);
+    onLogin(values.email, values.password);
   }
 
   return (
     <section className="login">
       <div className="login__block">
-        <Greeting text="Рады видеть!" />
+        <Greeting text="Рады видеть!" loggedIn={loggedIn} />
       </div>
 
-      <form className="login__form" onSubmit={handleSubmit}>
+      <form className="login__form" onSubmit={handleSubmit} noValidate>
         <span className="login__input">E-mail</span>
         <input
           className="login__field login__field_email"
@@ -35,7 +28,10 @@ function Login({ onLogin }) {
           pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
           required
           autoComplete="off"
-          onSubmit={handleEmailSubmit}
+          onChange={handleChange}
+          disabled={disabled}
+          error={errors.email}
+          value={values.email || ""}
         ></input>
 
         <span className="login__input">Пароль</span>
@@ -46,9 +42,13 @@ function Login({ onLogin }) {
           minLength="6"
           required
           autoComplete="off"
-          onSubmit={handlePasswordSubmit}
+          onChange={handleChange}
+          disabled={disabled}
+          error={errors.password}
+          value={values.password || ""}
         ></input>
         <FooterButton
+          disabledButton={!isValid}
           buttonText="Войти"
           paragraph="Еще не зарегистрированы?"
           linkText="Регистрация"

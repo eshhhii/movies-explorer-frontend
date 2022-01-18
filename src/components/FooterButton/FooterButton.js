@@ -25,6 +25,7 @@ function FooterButton({
       >
         {buttonText}
       </button>
+
       <div
         className={`footer-button__redirect ${
           name === "login" ? "footer-button__redirect_login" : ""

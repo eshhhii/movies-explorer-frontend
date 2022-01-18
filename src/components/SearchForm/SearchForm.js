@@ -2,7 +2,7 @@ import React from "react";
 import "./SearchForm.css";
 import FilterCheckBox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm() {
+function SearchForm({ handleToggle }) {
   return (
     <section className="search">
       <form className="search__form">
@@ -18,7 +18,7 @@ function SearchForm() {
           </button>
         </div>
       </form>
-      <FilterCheckBox />
+      <FilterCheckBox handleToggle={handleToggle} />
       <div className="search__line"></div>
     </section>
   );
