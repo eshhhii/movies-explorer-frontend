@@ -3,41 +3,40 @@ import "./Profile.css";
 import Greeting from "../Greeting/Greeting";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import useValidation from "../../utils/validation";
+import { useFormWithValidation } from "../../utils/validation";
 
 function Profile({ onSignOut, onUpdate }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const { values, errors, isValid, handleChange, setValues } = useValidation();
-
+  const [formSavedProcess, setFormSavedProcess] = React.useState(false);
   const [visibleSubmitButton, setVisibleSubmitButton] = React.useState(false);
-  const [isDisabledInput, setDisabledInput] = React.useState(true);
-
-  function handleSubmit(evt) {
-    evt.preventDefault();
-    onUpdate({
-      name: values.name || currentUser.name,
-      email: values.email || currentUser.email,
-    });
-
-    setVisibleSubmitButton(false);
-    setDisabledInput(true);
-  }
-
-  function handleClickEditButton() {
-    setDisabledInput(false);
-    setVisibleSubmitButton(true);
-  }
+  const { values, handleChange, resetForm, errors, isValid } =
+    useFormWithValidation();
 
   React.useEffect(() => {
-    setValues(currentUser);
-  }, [currentUser, setValues]);
+    if (currentUser) {
+      resetForm(currentUser, {}, true);
+      setTimeout(() => {
+        setFormSavedProcess(false);
+      }, 3000);
+    }
+  }, [currentUser, resetForm]);
+
+  function handleSubmit(e) {
+    setFormSavedProcess(true);
+    e.preventDefault();
+    onUpdate({ email: values.email, name: values.name });
+    setVisibleSubmitButton(false);
+  }
+  function handleClickEditButton() {
+    setVisibleSubmitButton(true);
+  }
 
   return (
     <>
       <Header />
       <section className="profile">
         <Greeting text={currentUser.name} loggedIn={true} name="profile" />
-        <form className="profile__form" onSubmit={handleSubmit} noValidate>
+        <form className="profile__form" onSubmit={handleSubmit}>
           <div className="profile__wrapper">
             <span className="profile__name">Имя</span>
             <input
@@ -47,13 +46,16 @@ function Profile({ onSignOut, onUpdate }) {
               autoComplete="off"
               minLength="2"
               maxLength="40"
+              pattern="^[А-Яа-яЁёA-Za-z]+-? ?[А-Яа-яЁёA-Za-z]+$"
               onChange={handleChange}
-              value={values.name || ""}
-              error={errors.name}
-              disabled={isDisabledInput}
+              value={values.name || currentUser.name}
+              disabled={formSavedProcess ? true : false}
               required
             ></input>
           </div>
+          <span className="login__input-error" id="name-error">
+            {errors.name}
+          </span>
 
           <div className="profile__wrapper">
             <span className="profile__email">E-mail</span>
@@ -61,17 +63,19 @@ function Profile({ onSignOut, onUpdate }) {
               className="profile__input_email"
               name="email"
               type="email"
-              pattern="^[А-Яа-яЁёA-Za-z]+-? ?[А-Яа-яЁёA-Za-z]+$"
               autoComplete="off"
               minLength="2"
               maxLength="40"
               onChange={handleChange}
-              value={values.email || ""}
-              error={errors.email}
-              disabled={isDisabledInput}
+              pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
+              value={values.email || currentUser.email}
+              disabled={formSavedProcess ? true : false}
               required
             ></input>
           </div>
+          <span className="login__input-error" id="name-error">
+            {errors.email}
+          </span>
           <div className="profile__container">
             {!visibleSubmitButton && (
               <>

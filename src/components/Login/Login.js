@@ -2,16 +2,30 @@ import React from "react";
 import "./Login.css";
 import Greeting from "../Greeting/Greeting";
 import FooterButton from "../FooterButton/FooterButton";
-import useValidation from "../../utils/validation";
+import { useFormWithValidation } from "../../utils/validation";
 
 function Login({ onLogin }) {
   const loggedIn = false;
-  const { values, errors, isValid, handleChange } = useValidation();
+  const [formSavedProcess, setFormSavedProcess] = React.useState(false);
+  const { values, handleChange, resetForm, errors, isValid } =
+    useFormWithValidation();
 
-  function handleSubmit(e) {
+  React.useEffect(() => {
+    resetForm({});
+    setTimeout(() => {
+      setFormSavedProcess(false);
+    }, 3000);
+  }, [resetForm]);
+
+  const handleSubmit = (e) => {
+    setFormSavedProcess(true);
     e.preventDefault();
-    onLogin(values.email, values.password);
-  }
+    if (!values.email || !values.password) {
+      return;
+    }
+    const { password, email } = values;
+    onLogin({ password, email });
+  };
 
   return (
     <section className="login">
@@ -19,7 +33,7 @@ function Login({ onLogin }) {
         <Greeting text="Рады видеть!" loggedIn={loggedIn} />
       </div>
 
-      <form className="login__form" onSubmit={handleSubmit} noValidate>
+      <form className="login__form" onSubmit={handleSubmit}>
         <span className="login__input">E-mail</span>
         <input
           className="login__field login__field_email"
@@ -29,9 +43,12 @@ function Login({ onLogin }) {
           required
           autoComplete="off"
           onChange={handleChange}
-          error={errors.email}
           value={values.email || ""}
+          disabled={formSavedProcess ? true : false}
         ></input>
+        <span className="login__input-error" id="email-error">
+          {errors.email}
+        </span>
 
         <span className="login__input">Пароль</span>
         <input
@@ -42,9 +59,12 @@ function Login({ onLogin }) {
           required
           autoComplete="off"
           onChange={handleChange}
-          error={errors.password}
           value={values.password || ""}
+          disabled={formSavedProcess ? true : false}
         ></input>
+        <span className="login__input-error" id="email-error">
+          {errors.password}
+        </span>
         <FooterButton
           disabledButton={!isValid}
           buttonText="Войти"

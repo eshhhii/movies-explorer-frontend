@@ -34,6 +34,12 @@
 .login__input:first-of-type {
   margin-top: 0;
 }
+.login__input-error {
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  margin-top: 10px;
+}
 
 .login__field {
   border: none;

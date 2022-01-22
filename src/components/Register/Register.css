@@ -34,6 +34,13 @@
   margin-top: 0;
 }
 
+.register__input-error {
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  margin-top: 10px;
+}
+
 .register__field {
   border: none;
   border-bottom: 1px solid #e8e8e8;

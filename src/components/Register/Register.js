@@ -2,15 +2,29 @@ import React from "react";
 import "./Register.css";
 import Greeting from "../Greeting/Greeting";
 import FooterButton from "../FooterButton/FooterButton";
-import useValidation from "../../utils/validation";
+import { useFormWithValidation } from "../../utils/validation";
 
 function Register({ onRegister }) {
   const loggedIn = false;
-  const { values, errors, isValid, handleChange } = useValidation();
+  const [formSavedProcess, setFormSavedProcess] = React.useState(false);
+  const { values, handleChange, resetForm, errors, isValid } =
+    useFormWithValidation();
+
+  React.useEffect(() => {
+    resetForm({});
+    setTimeout(() => {
+      setFormSavedProcess(false);
+    }, 3000);
+  }, [resetForm]);
 
   const handleSubmit = (e) => {
+    setFormSavedProcess(true);
     e.preventDefault();
-    onRegister(values.name, values.email, values.password);
+    if (!values.email || !values.password) {
+      return;
+    }
+    const { password, email, name } = values;
+    onRegister({ password, email, name });
   };
 
   return (
@@ -19,7 +33,7 @@ function Register({ onRegister }) {
         <Greeting text="Добро пожаловать!" loggedIn={loggedIn} />
       </div>
 
-      <form className="register__form" onSubmit={handleSubmit} noValidate>
+      <form className="register__form" onSubmit={handleSubmit}>
         <span className="register__input">Имя</span>
         <input
           className="register__field register__field_name"
@@ -30,9 +44,12 @@ function Register({ onRegister }) {
           maxLength="40"
           onChange={handleChange}
           value={values.name || ""}
-          error={errors.name}
           required
+          disabled={formSavedProcess ? true : false}
         ></input>
+        <span className="register__input-error" id="name-error">
+          {errors.name}
+        </span>
         <span className="register__input">E-mail</span>
         <input
           className="register__field register__field_email"
@@ -44,7 +61,11 @@ function Register({ onRegister }) {
           onChange={handleChange}
           value={values.email || ""}
           error={errors.email}
+          disabled={formSavedProcess ? true : false}
         ></input>
+        <span className="register__input-error" id="name-error">
+          {errors.email}
+        </span>
 
         <span className="register__input">Пароль</span>
         <input
@@ -56,8 +77,11 @@ function Register({ onRegister }) {
           autoComplete="off"
           onChange={handleChange}
           value={values.password || ""}
-          error={errors.password}
+          disabled={formSavedProcess ? true : false}
         ></input>
+        <span className="register__input-error" id="email-error">
+          {errors.password}
+        </span>
         <FooterButton
           disabledButton={!isValid}
           buttonText="Зарегистрироваться"

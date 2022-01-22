@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { Route, Switch, useLocation, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -82,21 +81,23 @@ function App() {
     setInfo({ icon: icon, text: text });
   }
 
-  function handleUserRegistration(email, password, name) {
+  function handleUserRegistration(name, email, password) {
     auth
-      .register(email, password, name)
+      .register(name, email, password)
       .then((res) => {
-        handleInfoTooltipContainer({
-          icon: successIcon,
-          text: "Вы успешно зарегистрировались!",
-        });
-        handleInfoTooltipOpen();
+        if (res) {
+          handleInfoTooltipContainer({
+            icon: successIcon,
+            text: "Вы успешно зарегистрировались!",
+          });
+          handleInfoTooltipOpen();
 
-        setTimeout(history.push, 3500, "/signin");
-        setTimeout(closeAllPopups, 3000);
-        handleUserAuthorization(email, password);
-        history.push("/movies");
+          setTimeout(history.push, 3000, "/signin");
+          setTimeout(closeAllPopups, 2000);
+          handleUserAuthorization(email, password);
+        }
       })
+      .then(() => history.push("/movies"))
       .catch((err) => {
         handleInfoTooltipContainer({
           icon: failIcon,
@@ -104,7 +105,7 @@ function App() {
         });
         handleInfoTooltipOpen();
 
-        setTimeout(closeAllPopups, 3000);
+        setTimeout(closeAllPopups, 2000);
 
         console.log(err);
       });
@@ -114,16 +115,18 @@ function App() {
     auth
       .authorize(email, password)
       .then((res) => {
-        handleTokenCheck();
-        setLoggedIn(true);
-        handleInfoTooltipContainer({
-          icon: successIcon,
-          text: "Вы успешно авторизовались!",
-        });
-        handleInfoTooltipOpen();
-        setTimeout(history.push, 3500, "/");
-        setTimeout(closeAllPopups, 3000);
-        history.push("/movies");
+        if (res) {
+          setLoggedIn(true);
+          handleInfoTooltipContainer({
+            icon: successIcon,
+            text: "Вы успешно авторизовались!",
+          });
+          handleInfoTooltipOpen();
+          setTimeout(history.push, 3500, "/movies");
+          setTimeout(closeAllPopups, 3000);
+          localStorage.setItem("loggedIn", true);
+          handleTokenCheck();
+        }
       })
       .catch((err) => {
         handleInfoTooltipContainer({
@@ -282,7 +285,11 @@ function App() {
             onCardClickButton={handleCardClickButton}
           />
           <Route path="/signup">
-            <Register onRegister={handleUserRegistration} />
+            <Register
+              onRegister={handleUserRegistration}
+              onInfoTooltip={handleInfoTooltipOpen}
+              onClose={closeAllPopups}
+            />
           </Route>
           <Route path="/signin">
             <Login onLogin={handleUserAuthorization} />
