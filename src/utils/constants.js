@@ -1,0 +1,13 @@
+const MAX_CARDS_NUMBER = 7;
+const MIN_CARDS_NUMBER = 5;
+
+//дополнительные карточки
+const ADD_MAX_CARDS_NUMBER = 7;
+const ADD_MIN_CARDS_NUMBER = 2;
+
+export {
+  MAX_CARDS_NUMBER,
+  MIN_CARDS_NUMBER,
+  ADD_MAX_CARDS_NUMBER,
+  ADD_MIN_CARDS_NUMBER,
+};

@@ -8,6 +8,7 @@ export const INVALID_DATA =
 
 //страница обновления профиля
 export const PROFILE_UPDATE_ERROR = "При обновлении профиля произошла ошибка";
+export const SUCCSESS_UPDATE = "Данные упешно обновлены!";
 
 //другое
 export const SERVER_ERROR = "500 На сервере произошла ошибка";

@@ -1,14 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Profile.css";
 import Greeting from "../Greeting/Greeting";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../utils/validation";
 
-function Profile({ onSignOut, onUpdate }) {
+function Profile({ onSignOut, onUpdate, message }) {
   const currentUser = React.useContext(CurrentUserContext);
   const [formSavedProcess, setFormSavedProcess] = React.useState(false);
-  const [visibleSubmitButton, setVisibleSubmitButton] = React.useState(false);
   const { values, handleChange, resetForm, errors, isValid } =
     useFormWithValidation();
 
@@ -24,18 +24,19 @@ function Profile({ onSignOut, onUpdate }) {
   function handleSubmit(e) {
     setFormSavedProcess(true);
     e.preventDefault();
-    onUpdate({ email: values.email, name: values.name });
-    setVisibleSubmitButton(false);
+    onUpdate({ name: values.name, email: values.email });
   }
-  function handleClickEditButton() {
-    setVisibleSubmitButton(true);
-  }
+
 
   return (
     <>
       <Header />
       <section className="profile">
-        <Greeting text={currentUser.name} loggedIn={true} name="profile" />
+        <Greeting
+          text={`Привет, ${currentUser.name}!`}
+          loggedIn={true}
+          name="profile"
+        />
         <form className="profile__form" onSubmit={handleSubmit}>
           <div className="profile__wrapper">
             <span className="profile__name">Имя</span>
@@ -76,37 +77,29 @@ function Profile({ onSignOut, onUpdate }) {
           <span className="login__input-error" id="name-error">
             {errors.email}
           </span>
-          <div className="profile__container">
-            {!visibleSubmitButton && (
-              <>
-                <button
-                  className="profile__button"
-                  type="submit"
-                  onClick={handleClickEditButton}
-                >
-                  Редактировать
-                </button>
-                <button
-                  className="profile__button_exit"
-                  type="button"
-                  onClick={onSignOut}
-                >
-                  Выйти из аккаунта
-                </button>
-              </>
-            )}
-            {visibleSubmitButton && (
-              <button
-                type="submit"
-                className={`profile__button-submit ${
-                  !isValid ? "profile__button-submit_disabled" : ""
-                }`}
-                disabled={!isValid}
-              >
-                Сохранить
-              </button>
-            )}
-          </div>
+          <span className="profile__input-message">{message}</span>
+
+       <button
+            type="submit"
+            className={`profile__button
+          ${!isValid && "profile__button_disabled"}
+          ${
+            values.email === currentUser.email &&
+            values.name === currentUser.name &&
+            "profile__button_disabled"
+          }`}
+          >
+            Редактировать
+          </button>
+          <Link to="/">
+            <button
+              className="profile__button-exit"
+              type="button"
+              onClick={onSignOut}
+            >
+              Выйти из аккаунта
+            </button>
+          </Link>
         </form>
       </section>
     </>

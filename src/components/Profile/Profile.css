@@ -1,6 +1,10 @@
 .profile {
-  display: flex;
-  flex-direction: column;
+  margin: 0 auto;
+  padding: 74px 0 70px;
+  max-width: 410px;
+  min-height: 100vh;
+  text-align: center;
+  box-sizing: border-box;
   align-items: center;
   margin: 74px auto 0;
 }
@@ -86,10 +90,19 @@
   line-height: 13px;
 }
 
+.profile__input-message {
+  color: #2be080;
+  font-size: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+}
+
 .profile__container {
   margin: 220px 0 70px;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .profile__button {
@@ -107,8 +120,14 @@
   opacity: 0.8;
   cursor: pointer;
 }
+.profile__button_disabled {
+  color: #000000;
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
 
-.profile__button_exit {
+.profile__button-exit {
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
@@ -118,22 +137,33 @@
   border: none;
 }
 
-.profile__exit:hover {
+.profile__button-exit:hover {
   opacity: 0.8;
   cursor: pointer;
 }
-.profile__button-submit_disabled {
-  background-color: #f8f8f8;
-  border: 1px solid #a0a0a0;
-  color: #000000;
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
+/*
+.profile__button-submit {
+  width: 100%;
+  background-color: #000000;
+  align-items: center;
+  text-align: center;
+  border-radius: 3px;
+  color: #ffffff;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 13px 0 15px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
-input:disabled {
-  background-color: transparent;
-}
+.profile__button-submit:hover {
+  opacity: 0.8;
+} */
+
 @media (max-width: 768px) {
   .profile {
     margin: 236px auto 0;

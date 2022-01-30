@@ -23,8 +23,8 @@ function Register({ onRegister }) {
     if (!values.email || !values.password) {
       return;
     }
-    const { password, email, name } = values;
-    onRegister({ password, email, name });
+    const { name, email, password } = values;
+    onRegister({ name, email, password });
   };
 
   return (
@@ -72,7 +72,7 @@ function Register({ onRegister }) {
           className="register__field register__field_password"
           name="password"
           type="password"
-          minLength="6"
+          minLength="8"
           required
           autoComplete="off"
           onChange={handleChange}

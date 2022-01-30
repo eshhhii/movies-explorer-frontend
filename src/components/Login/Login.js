@@ -55,7 +55,7 @@ function Login({ onLogin }) {
           className="login__field login__field_password"
           name="password"
           type="password"
-          minLength="6"
+          minLength="8"
           required
           autoComplete="off"
           onChange={handleChange}
