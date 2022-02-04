@@ -1,19 +1,21 @@
 import React from "react";
 import "./MoviesCard.css";
-import { useLocation } from "react-router-dom";
+import Like from "../../images/like.svg";
+import Unlike from "../../images/unlike.svg";
 
-function MoviesCard({ card }) {
-  const [isMovieSaved, setIsMovieSaved] = React.useState(false);
-  const location = useLocation();
-  const moviePage = location.pathname === "/movies";
-  const savedMoviePage = location.pathname === "/saved-movies";
-
-  function handleMovieSave() {
-    setIsMovieSaved(!isMovieSaved);
+function MoviesCard({ card, onCardClickButton, isMovieSaved }) {
+  function getMovieDuration(card) {
+    return `${Math.floor(card?.duration / 60)}ч ${card?.duration % 60}м`;
   }
 
-  function handleMovieDelete(evt) {
-    evt.target.closest(".moviescard").remove();
+  function getCardImage(card) {
+    if (card.image && card.image.url)
+      return `https://api.nomoreparties.co/beatfilm-movies${card.image.url}`;
+    if (card.image) return card.image;
+  }
+
+  function handleCardClickButton() {
+    onCardClickButton(card);
   }
 
   return (
@@ -21,32 +23,32 @@ function MoviesCard({ card }) {
       <div className="moviescard__block">
         <div className="moviescard__wrapper">
           <h3 className="moviescard__title">{card.title}</h3>
-          <p className="moviescard__duration">{card.duration}</p>
+          <p className="moviescard__duration">{getMovieDuration(card)}</p>
         </div>
-        {moviePage &&
-          (isMovieSaved ? (
-            <button
-              className="moviescard__like moviescard__like_active"
-              type="button"
-              onClick={handleMovieSave}
-            ></button>
-          ) : (
-            <button
-              className="moviescard__like"
-              type="button"
-              onClick={handleMovieSave}
-            ></button>
-          ))}
-        {savedMoviePage && (
+        <div className="moviescard__container">
+          <a
+            href={card.trailerLink}
+            target="_blank"
+            rel="noreferrer"
+            className="moviescard__link"
+          >
+            <img
+              className="moviescard__image"
+              src={getCardImage(card)}
+              alt={card.nameRU}
+            />
+          </a>
+
           <button
-            className="moviescard__like moviescard__like_delete"
+            className={`moviescard__like ${
+              isMovieSaved ? "moviescard__like_active" : ""
+            }`}
             type="button"
-            onClick={handleMovieDelete}
-          ></button>
-        )}
-      </div>
-      <div className="moviescard__container">
-        <img className="moviescard__image" src={card.image} alt={card.title} />
+            onClick={handleCardClickButton}
+          >
+            {isMovieSaved ? Like : Unlike}
+          </button>
+        </div>
       </div>
     </section>
   );

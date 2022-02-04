@@ -6,7 +6,14 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import movies from "../../utils/movies";
 
-function Movies({filterMovies,onCardClickButton, isLoading, message, savedMovies, searchMovie }) {
+function Movies({
+  filterMovies,
+  onCardClickButton,
+  isLoading,
+  message,
+  savedMovies,
+  searchMovie,
+}) {
   const [shortMovies, setShortMovies] = React.useState([]);
   const [isChecked, setIsChecked] = React.useState(false);
 
@@ -19,16 +26,14 @@ function Movies({filterMovies,onCardClickButton, isLoading, message, savedMovies
     <>
       <Header />
       <section className="movies">
-        <SearchForm 
-        searchMovie={searchMovie}
-        setIsChecked={setIsChecked}
-        />
-        <MoviesCardList 
-        isLoading={isLoading}
+        <SearchForm searchMovie={searchMovie} setIsChecked={setIsChecked} />
+        <MoviesCardList
+          isLoading={isLoading}
           movies={isChecked ? shortMovies : movies}
           savedMovies={savedMovies}
           message={message}
-        cards={movies} savedMoviePage={false} moreBtn={true} onCardClickButton={onCardClickButton}/>
+          onCardClickButton={onCardClickButton}
+        />
       </section>
       <Footer />
     </>
