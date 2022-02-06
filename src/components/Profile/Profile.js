@@ -24,9 +24,11 @@ function Profile({ onSignOut, onUpdate, message }) {
   function handleSubmit(e) {
     setFormSavedProcess(true);
     e.preventDefault();
-    onUpdate({ name: values.name, email: values.email });
+    onUpdate({
+      name: values.name || currentUser.name,
+      email: values.email || currentUser.email,
+    });
   }
-
 
   return (
     <>
@@ -49,7 +51,7 @@ function Profile({ onSignOut, onUpdate, message }) {
               maxLength="40"
               pattern="^[А-Яа-яЁёA-Za-z]+-? ?[А-Яа-яЁёA-Za-z]+$"
               onChange={handleChange}
-              value={values.name || currentUser.name}
+              value={values.name || ""}
               disabled={formSavedProcess ? true : false}
               required
             ></input>
@@ -69,7 +71,7 @@ function Profile({ onSignOut, onUpdate, message }) {
               maxLength="40"
               onChange={handleChange}
               pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
-              value={values.email || currentUser.email}
+              value={values.email || ""}
               disabled={formSavedProcess ? true : false}
               required
             ></input>
@@ -79,7 +81,7 @@ function Profile({ onSignOut, onUpdate, message }) {
           </span>
           <span className="profile__input-message">{message}</span>
 
-       <button
+          <button
             type="submit"
             className={`profile__button
           ${!isValid && "profile__button_disabled"}

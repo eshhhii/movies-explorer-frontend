@@ -35,6 +35,15 @@
   transform: scale(1.01);
   border: 1.5px solid #e8e8e8;
 }
+.search__input_error {
+  font-size: 12px;
+  line-height: 1.2;
+  color: black;
+  cursor: text;
+  position: absolute;
+  left: 40%;
+  bottom: 40%;
+}
 
 .search__button {
   background-color: #000000;

@@ -4,35 +4,37 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
-import movies from "../../utils/movies";
 
 function Movies({
+  movies,
+  savedMovies,
   filterMovies,
-  onCardClickButton,
+  onCardLike,
+  onCardUnlike,
   isLoading,
   message,
-  savedMovies,
   searchMovie,
 }) {
   const [shortMovies, setShortMovies] = React.useState([]);
-  const [isChecked, setIsChecked] = React.useState(false);
+  const [isOn, setIsOn] = React.useState(false);
 
   React.useEffect(() => {
-    if (isChecked) {
+    if (isOn) {
       setShortMovies(filterMovies(movies));
     }
-  }, [isChecked]);
+  }, [isOn]);
   return (
     <>
       <Header />
       <section className="movies">
-        <SearchForm searchMovie={searchMovie} setIsChecked={setIsChecked} />
+        <SearchForm searchMovie={searchMovie} setIsOn={setIsOn} />
         <MoviesCardList
           isLoading={isLoading}
-          movies={isChecked ? shortMovies : movies}
+          movies={isOn ? shortMovies : movies}
           savedMovies={savedMovies}
           message={message}
-          onCardClickButton={onCardClickButton}
+          onCardLike={onCardLike}
+          onCardUnlike={onCardUnlike}
         />
       </section>
       <Footer />

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { Route, Switch, useHistory, Redirect } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -13,7 +14,7 @@ import {
   PROFILE_UPDATE_ERROR,
   SUCCSESS_UPDATE,
   MOVIES_SERVER_ERROR,
-  SHORT
+  SHORT,
 } from "../../utils/messages";
 import "./App.css";
 import Main from "../Main/Main";
@@ -26,7 +27,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import NotFound from "../NotFound/NotFound";
 
 function App() {
-   const [currentUser, setCurrentUser] = React.useState({
+  const [currentUser, setCurrentUser] = React.useState({
     name: "",
     email: "",
   });
@@ -109,6 +110,11 @@ function App() {
     resetMessage();
   }, []);
 
+  function showAnswer(message) {
+    setMessage(message);
+    setTimeout(() => setMessage(""), 10000);
+  }
+
   const handleTokenCheck = React.useCallback(() => {
     auth
       .checkToken()
@@ -128,11 +134,6 @@ function App() {
   React.useEffect(() => {
     handleTokenCheck();
   }, [handleTokenCheck]);
-
-  function showAnswer(message) {
-    setMessage(message);
-    setTimeout(() => setMessage(""), 10000);
-  }
 
   function handleUserRegistration(data) {
     auth
@@ -178,9 +179,9 @@ function App() {
       });
   }
 
-  function handleUpdateUserInfo({ email, name }) {
+  function handleUpdateUserInfo({ name, email }) {
     mainApi
-      .editUserInfo(email, name)
+      .editUserInfo(name, email)
       .then((res) => {
         localStorage.setItem("currentUser", JSON.stringify(res));
         setCurrentUser(res);
@@ -223,12 +224,10 @@ function App() {
         );
         setSavedMovies([res, ...savedMovies]);
         setFoundSavedMovies([res, ...savedMovies]);
-        setMessage('');
+        setMessage("");
       })
       .catch((err) => {
-        console.log(
-          `Невозможно сохранить фильм. Код ошибки ${err}`
-        );
+        console.log(`Невозможно сохранить фильм. Код ошибки ${err}`);
         setMessage(err);
       });
   }
@@ -245,20 +244,18 @@ function App() {
           "savedMovies",
           JSON.stringify(savedMovies.filter((i) => i._id !== savedMovie._id))
         );
-setSavedMovies(savedMovies.filter((i) => i._id !== savedMovie._id));
+        setSavedMovies(savedMovies.filter((i) => i._id !== savedMovie._id));
         setFoundSavedMovies(
           savedMovies.filter((i) => i._id !== savedMovie._id)
         );
       })
       .catch((err) => {
         console.log(err);
-        console.error(
-          `Фильм невозможно удалить из-за ошибки ${err}`
-        );
+        console.error(`Фильм невозможно удалить из-за ошибки ${err}`);
       });
   }
-  
-   function handleMovieSearch(request) {
+
+  function handleMovieSearch(request) {
     const searchWord = request.toLowerCase();
 
     const movieSearchResult = movies.filter((value) => {
@@ -293,19 +290,8 @@ setSavedMovies(savedMovies.filter((i) => i._id !== savedMovie._id));
   }
 
   function filterMovies(movies) {
-    return movies.filter(
-      (movie) => movie.duration <= SHORT
-    );
+    return movies.filter((movie) => movie.duration <= SHORT);
   }
-
-
-  function handleCardClickButton(movie) {
-    if (!movie.isSaved && !movie._id) {
-      handleSaveMovie(movie);
-    } else {
-      handleDeleteMovie(movie);
-    }
-  } //проверить работу в moviescard
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -320,11 +306,13 @@ setSavedMovies(savedMovies.filter((i) => i._id !== savedMovie._id));
             isLoading={isLoading}
             message={message}
             movies={foundMovies}
+            savedMovies={savedMovies}
             loggedIn={loggedIn}
             searchMovie={handleMovieSearch}
             filterMovies={filterMovies}
             userData={userData}
-            onCardClickButton={handleCardClickButton}
+            onCardLike={handleSaveMovie}
+            onCardUnlike={handleDeleteMovie}
           />
           <ProtectedRoute
             path="/saved-movies"
@@ -337,7 +325,18 @@ setSavedMovies(savedMovies.filter((i) => i._id !== savedMovie._id));
             searchSavedMovie={handleSavedMovieSearch}
             filterMovies={filterMovies}
             foundSavedMovies={foundSavedMovies}
-            onCardClickButton={handleCardClickButton}
+            onCardLike={handleSaveMovie}
+            onCardUnlike={handleDeleteMovie}
+          />
+          <ProtectedRoute
+            path="/profile"
+            component={Profile}
+            message={message}
+            userData={userData}
+            isLoading={userData}
+            onSignOut={handleUserSignOut}
+            loggedIn={loggedIn}
+            onUpdate={handleUpdateUserInfo}
           />
           <Route path="/signup">
             {loggedIn ? (
@@ -353,16 +352,6 @@ setSavedMovies(savedMovies.filter((i) => i._id !== savedMovie._id));
               <Login onLogin={handleUserAuthorization} message={message} />
             )}
           </Route>
-          <ProtectedRoute
-            path="/profile"
-            component={Profile}
-            message={message}
-            userData={userData}
-            isLoading={userData}
-            onSignOut={handleUserSignOut}
-            loggedIn={loggedIn}
-            onUpdate={handleUpdateUserInfo}
-          />
           <Route path="*">
             <NotFound loggedIn={loggedIn} />
           </Route>

@@ -15,14 +15,14 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  editUserInfo(email, name) {
+  editUserInfo(name, email) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       credentials: "include",
       body: JSON.stringify({
-        email: email,
         name: name,
+        email: email,
       }),
     }).then(this._checkResponse);
   }
@@ -34,23 +34,23 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  addMovieCard(movie) {
+  addMovieCard(data) {
     return fetch(`${this._url}/movies`, {
       method: "POST",
       headers: this._headers,
       credentials: "include",
       body: JSON.stringify({
-        country: movie.country,
-        director: movie.director,
-        duration: movie.duration,
-        year: movie.year,
-        description: movie.description,
-        image: `https://api.nomoreparties.co${movie.image.url}`,
-        thumbnail: `https://api.nomoreparties.co${movie.image.url}`,
-        trailer: movie.trailerLink,
-        movieId: movie.id,
-        nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
+        country: data.country || " ",
+        director: data.director || " ",
+        duration: data.duration || " ",
+        year: data.year || " ",
+        description: data.description || " ",
+        image: `https://api.nomoreparties.co${data.image.url}`,
+        thumbnail: `https://api.nomoreparties.co${data.image.url}`,
+        trailer: data.trailerLink || " ",
+        movieId: data.id || " ",
+        nameRU: data.nameRU || " ",
+        nameEN: data.nameEN || " ",
       }),
     }).then(this._checkResponse);
   }

@@ -10,15 +10,8 @@ import {
   ADD_MIN_CARDS_NUMBER,
 } from "../../utils/constants";
 
-function MoviesCardList({
-  savedMovies,
-  isLoading,
-  movies,
-  message,
-  movie,
-  onCardClickButton,
-}) {
-  const films = movies || [];
+function MoviesCardList(props) {
+  const movies = props.movies || [];
   const size = window.innerWidth;
   const [cardsArray, setCardsArray] = React.useState(0);
 
@@ -49,20 +42,22 @@ function MoviesCardList({
 
   return (
     <section className="list">
-      {isLoading ? (
+      {props.isLoading ? (
         <Preloader />
       ) : (
         <>
-          {message && <p className="movies-message">{message}</p>}
+          {props.message && <p className="movies-message">{props.message}</p>}
           <ul className="list__list">
-            {films &&
-              films.slice(0, cardsArray).map((film) => {
-                if (savedMovies.find((elem) => elem.movieId === film.id)) {
+            {movies &&
+              movies.slice(0, cardsArray).map((movie) => {
+                if (
+                  props.savedMovies.find((elem) => elem.movieId === movie.id)
+                ) {
                   return (
                     <MoviesCard
                       card={movie}
                       key={movie.id}
-                      onCardClickButton={onCardClickButton}
+                      onChangeState={props.onCardUnlike}
                       isMovieSaved={true}
                     />
                   );
@@ -71,7 +66,7 @@ function MoviesCardList({
                     <MoviesCard
                       card={movie}
                       key={movie.id}
-                      onCardClickButton={onCardClickButton}
+                      onChangeState={props.onCardLike}
                       isMovieSaved={false}
                     />
                   );

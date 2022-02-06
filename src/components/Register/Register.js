@@ -4,7 +4,7 @@ import Greeting from "../Greeting/Greeting";
 import FooterButton from "../FooterButton/FooterButton";
 import { useFormWithValidation } from "../../utils/validation";
 
-function Register({ onRegister }) {
+function Register({ onRegister, message }) {
   const loggedIn = false;
   const [formSavedProcess, setFormSavedProcess] = React.useState(false);
   const { values, handleChange, resetForm, errors, isValid } =
@@ -82,6 +82,7 @@ function Register({ onRegister }) {
         <span className="register__input-error" id="email-error">
           {errors.password}
         </span>
+        <span className="register__input-error">{message}</span>
         <FooterButton
           disabledButton={!isValid}
           buttonText="Зарегистрироваться"

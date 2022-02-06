@@ -4,38 +4,35 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
-import savedMovies from "../../utils/savedMovies.js";
 
 function SavedMovies({
   onCardClickButton,
   message,
+  savedMovies,
   foundSavedMovies,
   filterMovies,
   searchSavedMovie,
   isLoading,
 }) {
   const [shortMovies, setShortMovies] = React.useState([]);
-  const [isChecked, setIsChecked] = React.useState(false);
+  const [isOn, setIsOn] = React.useState(false);
   let movies = foundSavedMovies.length > 0 ? foundSavedMovies : savedMovies;
   if (message) {
     movies = [];
   }
 
   React.useEffect(() => {
-    if (isChecked && !message) {
+    if (isOn && !message) {
       setShortMovies(filterMovies(movies));
     }
-  }, [isChecked, movies]);
+  }, [isOn, movies]);
   return (
     <>
       <Header />
       <section className="saved-movies">
-        <SearchForm
-          searchMovie={searchSavedMovie}
-          setIsChecked={setIsChecked}
-        />
+        <SearchForm searchMovie={searchSavedMovie} setIsOn={setIsOn} />
         <MoviesCardList
-          savedMovies={isChecked ? shortMovies : movies}
+          savedMovies={isOn ? shortMovies : movies}
           isLoading={isLoading}
           onCardClickButton={onCardClickButton}
         />
