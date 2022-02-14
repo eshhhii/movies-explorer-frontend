@@ -1,19 +1,19 @@
 import React from "react";
 import "./MoviesCard.css";
 
-function MoviesCard({ card, onChangeState, isMovieSaved }) {
+function MoviesCard({ card, onChangeLike, isMovieSaved }) {
   function getMovieDuration(card) {
     return `${Math.floor(card?.duration / 60)}ч ${card?.duration % 60}м`;
   }
 
-  function getCardImage(card, onChangeState) {
+  function getCardImage(card) {
     if (card.image && card.image.url)
       return `https://api.nomoreparties.co/${card.image.url}`;
     if (card.image) return card.image;
   }
 
-  function handleCardClickButton() {
-    return onChangeState(card);
+  function handleClickButton() {
+    return onChangeLike(card);
   }
 
   return (
@@ -25,10 +25,10 @@ function MoviesCard({ card, onChangeState, isMovieSaved }) {
         </div>
         <button
           className={`moviescard__like ${
-            isMovieSaved ? "moviescard__like_active" : "moviescard__like"
+            isMovieSaved ? "moviescard__like_active" : ""
           }`}
           type="button"
-          onClick={handleCardClickButton}
+          onClick={handleClickButton}
         ></button>
       </div>
       <div className="moviescard__container">

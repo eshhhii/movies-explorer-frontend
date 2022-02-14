@@ -6,28 +6,20 @@ import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../utils/validation";
 
-function Profile({ onSignOut, onUpdate, message }) {
+function Profile({ handleUserSignOut, onUpdate, message }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [formSavedProcess, setFormSavedProcess] = React.useState(false);
   const { values, handleChange, resetForm, errors, isValid } =
     useFormWithValidation();
 
   React.useEffect(() => {
     if (currentUser) {
       resetForm(currentUser, {}, true);
-      setTimeout(() => {
-        setFormSavedProcess(false);
-      }, 3000);
     }
   }, [currentUser, resetForm]);
 
   function handleSubmit(e) {
-    setFormSavedProcess(true);
     e.preventDefault();
-    onUpdate({
-      name: values.name || currentUser.name,
-      email: values.email || currentUser.email,
-    });
+    onUpdate({ email: values.email, name: values.name });
   }
 
   return (
@@ -51,8 +43,7 @@ function Profile({ onSignOut, onUpdate, message }) {
               maxLength="40"
               pattern="^[А-Яа-яЁёA-Za-z]+-? ?[А-Яа-яЁёA-Za-z]+$"
               onChange={handleChange}
-              value={values.name || ""}
-              disabled={formSavedProcess ? true : false}
+              value={values.name || currentUser.name}
               required
             ></input>
           </div>
@@ -71,8 +62,7 @@ function Profile({ onSignOut, onUpdate, message }) {
               maxLength="40"
               onChange={handleChange}
               pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
-              value={values.email || ""}
-              disabled={formSavedProcess ? true : false}
+              value={values.email || currentUser.email}
               required
             ></input>
           </div>
@@ -97,7 +87,7 @@ function Profile({ onSignOut, onUpdate, message }) {
             <button
               className="profile__button-exit"
               type="button"
-              onClick={onSignOut}
+              onClick={handleUserSignOut}
             >
               Выйти из аккаунта
             </button>

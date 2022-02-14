@@ -42,50 +42,45 @@ function MoviesCardList(props) {
 
   return (
     <section className="list">
-      {props.isLoading ? (
-        <Preloader />
-      ) : (
-        <>
-          {props.message && <p className="movies-message">{props.message}</p>}
-          <ul className="list__list">
-            {movies &&
-              movies.slice(0, cardsArray).map((movie) => {
-                if (
-                  props.savedMovies.find((elem) => elem.movieId === movie.id)
-                ) {
-                  return (
-                    <MoviesCard
-                      card={movie}
-                      key={movie.id}
-                      onChangeState={props.onCardUnlike}
-                      isMovieSaved={true}
-                    />
-                  );
-                } else {
-                  return (
-                    <MoviesCard
-                      card={movie}
-                      key={movie.id}
-                      onChangeState={props.onCardLike}
-                      isMovieSaved={false}
-                    />
-                  );
-                }
-              })}
-          </ul>
-          {movies.length > cardsArray && (
-            <div className="list__container">
-              <button
-                className="list__button"
-                type="button"
-                onClick={handleAddCardClick}
-              >
-                Еще
-              </button>
-            </div>
-          )}
-        </>
-      )}
+      <Preloader preloader={props.preloader} />
+      <>
+        <p className="movies-message">{props.message}</p>
+        <ul className="list__list">
+          {movies &&
+            movies.slice(0, cardsArray).map((movie) => {
+              if (props.savedMovies.find((elem) => elem.movieId === movie.id)) {
+                return (
+                  <MoviesCard
+                    card={movie}
+                    key={movie.id}
+                    onChangeLike={props.onMovieLike}
+                    isMovieSaved={true}
+                  />
+                );
+              } else {
+                return (
+                  <MoviesCard
+                    card={movie}
+                    key={movie.id}
+                    onChangeLike={props.onMovieDelete}
+                    isMovieSaved={false}
+                  />
+                );
+              }
+            })}
+        </ul>
+        {movies.length > cardsArray && (
+          <div className="list__container">
+            <button
+              className="list__button"
+              type="button"
+              onClick={handleAddCardClick}
+            >
+              Еще
+            </button>
+          </div>
+        )}
+      </>
     </section>
   );
 }

@@ -1,15 +1,15 @@
-.moviescard {
+.savedmoviescard {
   display: flex;
   justify-content: space-between;
   background: #f9f9f9;
   margin-bottom: 40px;
 }
 
-.moviescard:last-of-type {
+.savedmoviescard:last-of-type {
   margin-bottom: 0;
 }
 
-.moviescard__title {
+.savedmoviescard__title {
   max-width: 400px;
   font-style: normal;
   font-weight: 500;
@@ -19,11 +19,11 @@
   margin: 0;
 }
 
-.moviescard__block {
+.savedmoviescard__block {
   margin: 22px 0 22px 22px;
 }
 
-.moviescard__duration {
+.savedmoviescard__duration {
   font-weight: normal;
   font-size: 11px;
   line-height: 13px;
@@ -33,8 +33,13 @@
   margin: 13px 0 30px;
 }
 
-.moviescard__like {
-  background-image: url(../../images/unlike.svg);
+.savedmoviescard__like:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.savedmoviescard__like_delete {
+  background-image: url(../../images/delete.svg);
   width: 14px;
   height: 12px;
   border: none;
@@ -43,67 +48,53 @@
   background-color: transparent;
 }
 
-.moviescard__like:hover {
-  opacity: 0.7;
-  cursor: pointer;
-}
-
-.moviescard__like_active {
-  background-image: url(../../images/like.svg);
-  width: 14px;
-  height: 12px;
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-.moviescard__link {
+.savedmoviescard__link {
   transition: opacity 0.35s ease;
   width: 100%;
 }
 
-.moviescard__link:hover {
+.savedmoviescard__link:hover {
   cursor: pointer;
 }
 
-.moviescard__image {
+.savedmoviescard__image {
   width: 220px;
   height: 122px;
   margin: 6px;
 }
 
 @media all and (max-width: 770px) {
-  .moviescard {
+  .savedmoviescard {
     width: 100%;
   }
 }
 
 @media all and (max-width: 550px) {
-  .moviescard {
+  .savedmoviescard {
     margin-bottom: 20px;
     flex-direction: column-reverse;
   }
-  .moviescard__title {
+  .savedmoviescard__title {
     max-width: 228px;
     font-size: 12px;
     line-height: 15px;
   }
-  .moviescard__image {
+  .savedmoviescard__image {
     width: 100%;
     height: 168px;
     margin: 0;
   }
-  .moviescard__block {
+  .savedmoviescard__block {
     display: flex;
     margin: 0;
     flex-direction: row;
     justify-content: space-between;
     margin: 14px 12px;
   }
-  .moviescard__wrapper {
+  .savedmoviescard__wrapper {
     width: 95%;
   }
-  .moviescard__duration {
+  .savedmoviescard__duration {
     font-size: 12px;
     line-height: 15px;
     margin: 8px 0 0;

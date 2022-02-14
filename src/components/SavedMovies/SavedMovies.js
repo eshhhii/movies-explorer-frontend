@@ -2,17 +2,17 @@
 import React from "react";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
-import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import SavedMoviesCardList from "../SavedMoviesCardList/SavedMoviesCardList";
 import Footer from "../Footer/Footer";
 
 function SavedMovies({
-  onCardClickButton,
+  onMovieDelete,
   message,
   savedMovies,
   foundSavedMovies,
   filterMovies,
   searchSavedMovie,
-  isLoading,
+  preloader,
 }) {
   const [shortMovies, setShortMovies] = React.useState([]);
   const [isOn, setIsOn] = React.useState(false);
@@ -31,10 +31,11 @@ function SavedMovies({
       <Header />
       <section className="saved-movies">
         <SearchForm searchMovie={searchSavedMovie} setIsOn={setIsOn} />
-        <MoviesCardList
+        <SavedMoviesCardList
           savedMovies={isOn ? shortMovies : movies}
-          isLoading={isLoading}
-          onCardClickButton={onCardClickButton}
+          preloader={preloader}
+          onMovieDelete={onMovieDelete}
+          message={message}
         />
       </section>
       <Footer />

@@ -15,22 +15,23 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  editUserInfo(name, email) {
+  getUserMovies() {
+    return fetch(`${this._url}/movies`, {
+      method: "GET",
+      headers: this._headers,
+      credentials: "include",
+    }).then(this._checkResponse);
+  }
+
+  editUserInfo({ name, email }) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       credentials: "include",
       body: JSON.stringify({
-        name: name,
-        email: email,
+        name,
+        email,
       }),
-    }).then(this._checkResponse);
-  }
-
-  signOut() {
-    return fetch(`${this._url}/signout`, {
-      method: "DELETE",
-      credentials: "include",
     }).then(this._checkResponse);
   }
 
@@ -45,8 +46,10 @@ class Api {
         duration: data.duration || " ",
         year: data.year || " ",
         description: data.description || " ",
-        image: `https://api.nomoreparties.co${data.image.url}`,
-        thumbnail: `https://api.nomoreparties.co${data.image.url}`,
+        image: `https://api.nomoreparties.co${data.image.url}` || " ",
+        thumbnail:
+          `https://api.nomoreparties.co${data.image.formats.thumbnail.url}` ||
+          " ",
         trailer: data.trailerLink || " ",
         movieId: data.id || " ",
         nameRU: data.nameRU || " ",
@@ -58,13 +61,6 @@ class Api {
   deleteMovieCard(id) {
     return fetch(`${this._url}/movies/${id}`, {
       method: "DELETE",
-      headers: this._headers,
-      credentials: "include",
-    }).then(this._checkResponse);
-  }
-
-  getUserMovies() {
-    return fetch(`${this._url}/movies`, {
       headers: this._headers,
       credentials: "include",
     }).then(this._checkResponse);

@@ -17,7 +17,7 @@ function Login({ onLogin, message }) {
     }, 3000);
   }, [resetForm]);
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     setFormSavedProcess(true);
     e.preventDefault();
     if (!values.email || !values.password) {
@@ -25,7 +25,7 @@ function Login({ onLogin, message }) {
     }
     const { password, email } = values;
     onLogin({ password, email });
-  };
+  }
 
   return (
     <section className="login">

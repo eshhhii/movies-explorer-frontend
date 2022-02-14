@@ -1,0 +1,59 @@
+.savedlist {
+  margin: 70px 70px 30px;
+}
+
+.savedlist__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.savedlist__container {
+  display: flex;
+  margin: 50px auto 80px;
+  justify-content: center;
+}
+
+.savedlist__button {
+  background-color: #ffffff;
+  width: 320px;
+  height: 36px;
+  color: #000000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 11px auto;
+  border: 1px solid #e8e8e8;
+  cursor: pointer;
+}
+
+.savedlist__button:hover {
+  opacity: 0.8;
+}
+
+.movies-message {
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+  justify-content: center;
+  align-self: center;
+  font-weight: 500;
+}
+
+@media all and (max-width: 770px) {
+  .savedlist {
+    margin: 60px 30px 30px;
+  }
+}
+
+@media all and (max-width: 550px) {
+  .savedlist {
+    margin: 40px 10px 20px;
+  }
+  .savedlist__button {
+    width: 240px;
+  }
+}

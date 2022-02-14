@@ -9,9 +9,9 @@ function Movies({
   movies,
   savedMovies,
   filterMovies,
-  onCardLike,
-  onCardUnlike,
-  isLoading,
+  onMovieLike,
+  onMovieDelete,
+  preloader,
   message,
   searchMovie,
 }) {
@@ -29,12 +29,12 @@ function Movies({
       <section className="movies">
         <SearchForm searchMovie={searchMovie} setIsOn={setIsOn} />
         <MoviesCardList
-          isLoading={isLoading}
+          preloader={preloader}
           movies={isOn ? shortMovies : movies}
           savedMovies={savedMovies}
           message={message}
-          onCardLike={onCardLike}
-          onCardUnlike={onCardUnlike}
+          onMovieLike={onMovieLike}
+          onMovieDelete={onMovieDelete}
         />
       </section>
       <Footer />
