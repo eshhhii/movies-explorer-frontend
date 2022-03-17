@@ -15,6 +15,10 @@ function MoviesCard({ card, onChangeLike, isMovieSaved }) {
   function handleClickButton() {
     return onChangeLike(card);
   }
+  const cardLikeButtonClassName = `moviescard__like ${
+    isMovieSaved ? "moviescard__like_active" : ""
+  }`;
+
 
   return (
     <section className="moviescard">
@@ -24,9 +28,7 @@ function MoviesCard({ card, onChangeLike, isMovieSaved }) {
           <p className="moviescard__duration">{getMovieDuration(card)}</p>
         </div>
         <button
-          className={`moviescard__like ${
-            isMovieSaved ? "moviescard__like_active" : ""
-          }`}
+          className={cardLikeButtonClassName}
           type="button"
           onClick={handleClickButton}
         ></button>

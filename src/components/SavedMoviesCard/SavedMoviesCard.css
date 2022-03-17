@@ -33,11 +33,6 @@
   margin: 13px 0 30px;
 }
 
-.savedmoviescard__like:hover {
-  opacity: 0.7;
-  cursor: pointer;
-}
-
 .savedmoviescard__like_delete {
   background-image: url(../../images/delete.svg);
   width: 14px;
@@ -46,6 +41,11 @@
   margin: 0;
   padding: 0;
   background-color: transparent;
+}
+
+.savedmoviescard__like_delete {
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 .savedmoviescard__link {

@@ -53,7 +53,7 @@ function MoviesCardList(props) {
                   <MoviesCard
                     card={movie}
                     key={movie.id}
-                    onChangeLike={props.onMovieLike}
+                    onChangeLike={props.onMovieDelete}
                     isMovieSaved={true}
                   />
                 );
@@ -62,7 +62,7 @@ function MoviesCardList(props) {
                   <MoviesCard
                     card={movie}
                     key={movie.id}
-                    onChangeLike={props.onMovieDelete}
+                    onChangeLike={props.onMovieLike}
                     isMovieSaved={false}
                   />
                 );
