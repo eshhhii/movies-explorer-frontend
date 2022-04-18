@@ -2,13 +2,13 @@ import React from "react";
 import "./Login.css";
 import Greeting from "../Greeting/Greeting";
 import FooterButton from "../FooterButton/FooterButton";
-import { useFormWithValidation } from "../../utils/validation";
+import { useValidation } from "../../utils/validation";
 
 function Login({ onLogin, message }) {
   const loggedIn = false;
   const [formSavedProcess, setFormSavedProcess] = React.useState(false);
   const { values, handleChange, resetForm, errors, isValid } =
-    useFormWithValidation();
+    useValidation();
 
   React.useEffect(() => {
     resetForm({});

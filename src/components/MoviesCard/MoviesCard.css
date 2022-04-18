@@ -50,6 +50,11 @@
 
 .moviescard__like_active {
   background-image: url(../../images/like_active.svg);
+  width: 14px;
+  height: 12px;
+  border: none;
+  margin: 0;
+  padding: 0;
   background-color: transparent;
 }
 .moviescard__like_active:active {

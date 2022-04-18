@@ -1,13 +1,16 @@
-const MAX_CARDS_NUMBER = 7;
-const MIN_CARDS_NUMBER = 5;
+export const SERVER_ERROR = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 
-//дополнительные карточки
-const ADD_MAX_CARDS_NUMBER = 7;
-const ADD_MIN_CARDS_NUMBER = 2;
+export const PROFILE_UPDATE_SUCCESS = 'Данные успешно обовлены!';
 
-export {
-  MAX_CARDS_NUMBER,
-  MIN_CARDS_NUMBER,
-  ADD_MAX_CARDS_NUMBER,
-  ADD_MIN_CARDS_NUMBER,
-};
+export const REGISTER_SUCCESS = 'Вы успешно зарегистрировались!';
+
+export const NO_SAVED_MOVIES = "Список пуст";
+
+export const ENTER_KEYWORD = 'Нужно ввести ключевое слово';
+
+export const START_SEARCHING = "Начните поиск";
+
+export const NOT_FOUND = 'Ничего не найдено';
+
+
+export const SHORT = 40;

@@ -6,13 +6,13 @@ import SavedMoviesCardList from "../SavedMoviesCardList/SavedMoviesCardList";
 import Footer from "../Footer/Footer";
 
 function SavedMovies({
+  isLoading,
   onMovieDelete,
   message,
   savedMovies,
   foundSavedMovies,
   filterMovies,
   searchSavedMovie,
-  preloader,
 }) {
   const [shortMovies, setShortMovies] = React.useState([]);
   const [isOn, setIsOn] = React.useState(false);
@@ -33,7 +33,7 @@ function SavedMovies({
         <SearchForm searchMovie={searchSavedMovie} setIsOn={setIsOn} />
         <SavedMoviesCardList
           savedMovies={isOn ? shortMovies : movies}
-          preloader={preloader}
+          isLoading={isLoading}
           onMovieDelete={onMovieDelete}
           message={message}
         />

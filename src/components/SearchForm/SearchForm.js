@@ -1,45 +1,44 @@
-import React from "react";
+import React, { useState } from 'react';
 import "./SearchForm.css";
-import FilterCheckBox from "../FilterCheckbox/FilterCheckbox";
+import FilterCheckBox from "../FilterCheckBox/FilterCheckBox";
 
-function SearchForm({ searchMovie, setIsOn }) {
-  const [searchWord, setSearchWord] = React.useState("");
-  const [isShortMovies, setIsShortMovies] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState("");
+import { ENTER_KEYWORD } from "../../utils/constants";
+import { removeWhiteSpace } from "../../utils/utils";
 
-  React.useEffect(() => {
-    setErrorMessage("");
-  }, [searchWord]);
+const SearchForm = ({
+    onSearchSubmit,
+    isOn,
+    handleToggle }) => {
 
-  function handleToggle(on) {
-    setIsShortMovies(on);
-    setIsOn(!isShortMovies);
-  }
+    const [value, setValue] = useState("");
+    const [error, setError] = useState("");
 
-  function onChange(e) {
-    setSearchWord(e.target.value);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    if (!searchWord) {
-      setErrorMessage("Необходимо ввести ключевое слово");
-      return;
+    function handleChange(evt) {
+        setValue(evt.target.value);
     }
 
-    searchMovie(searchWord);
-  }
+    function handleSubmit(evt) {
+        evt.preventDefault();
+
+        if (!value) {
+            setError(ENTER_KEYWORD);
+        } else {
+            setError("");
+            onSearchSubmit(removeWhiteSpace(value));
+        }
+    }
+
   return (
     <section className="search">
-      <form className="search__form" onSubmit={handleSubmit}>
+      <form className="search__form" onSubmit={handleSubmit} noValidate>
         <div className="search__container">
           <input
             className="search__input"
             placeholder="Фильм"
-            value={searchWord}
-            onChange={onChange}
             type="text"
+            value={value}
+            onChange={handleChange}
+            required
             autoComplete="off"
             minLength="2"
             maxLength="200"

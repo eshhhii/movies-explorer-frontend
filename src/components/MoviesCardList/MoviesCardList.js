@@ -42,9 +42,11 @@ function MoviesCardList(props) {
 
   return (
     <section className="list">
-      <Preloader preloader={props.preloader} />
-      <>
-        <p className="movies-message">{props.message}</p>
+     {props.isLoading ? (
+        <Preloader />
+      ) : (
+        <>
+       {props.message && <p className="movies-message">{props.message}</p>}
         <ul className="list__list">
           {movies &&
             movies.slice(0, cardsArray).map((movie) => {
@@ -54,7 +56,7 @@ function MoviesCardList(props) {
                     card={movie}
                     key={movie.id}
                     onChangeLike={props.onMovieDelete}
-                    isMovieSaved={true}
+                   
                   />
                 );
               } else {
@@ -63,7 +65,7 @@ function MoviesCardList(props) {
                     card={movie}
                     key={movie.id}
                     onChangeLike={props.onMovieLike}
-                    isMovieSaved={false}
+                    
                   />
                 );
               }
@@ -79,8 +81,9 @@ function MoviesCardList(props) {
               Еще
             </button>
           </div>
+          )}
+        </>
         )}
-      </>
     </section>
   );
 }

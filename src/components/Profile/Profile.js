@@ -4,12 +4,12 @@ import "./Profile.css";
 import Greeting from "../Greeting/Greeting";
 import Header from "../Header/Header";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { useFormWithValidation } from "../../utils/validation";
+import { useValidation } from "../../utils/validation";
 
 function Profile({ handleUserSignOut, onUpdate, message }) {
   const currentUser = React.useContext(CurrentUserContext);
   const { values, handleChange, resetForm, errors, isValid } =
-    useFormWithValidation();
+    useValidation();
 
   React.useEffect(() => {
     if (currentUser) {
