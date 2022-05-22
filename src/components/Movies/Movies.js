@@ -62,7 +62,7 @@ const Movies = ({
     <>
       <Header />
       <section className="movies">
-        <SearchForm searchMovie={searchMovie} setIsOn={setIsOn} />
+        <SearchForm onSearchSubmit={handleSearchSubmit} isOn={isSwitchOn} handleToggle={handleToggleSwitch} />
         {isLoading && <Preloader />}
         <MoviesCardList
         cards={currentMovies}

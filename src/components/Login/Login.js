@@ -1,31 +1,21 @@
 import React from "react";
 import "./Login.css";
 import Greeting from "../Greeting/Greeting";
+import Form from "../Form/Form";
+import Input from "../Input/Input";
 import FooterButton from "../FooterButton/FooterButton";
 import { useValidation } from "../../utils/validation";
 
-function Login({ onLogin, message }) {
+const Login = ({ onLogin }) => {
+
   const loggedIn = false;
-  const [formSavedProcess, setFormSavedProcess] = React.useState(false);
-  const { values, handleChange, resetForm, errors, isValid } =
-    useValidation();
+  const { values, errors, isValid, handleChange } = useValidation();
 
-  React.useEffect(() => {
-    resetForm({});
-    setTimeout(() => {
-      setFormSavedProcess(false);
-    }, 3000);
-  }, [resetForm]);
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      onLogin(values.email, values.password);
+  };
 
-  function handleSubmit(e) {
-    setFormSavedProcess(true);
-    e.preventDefault();
-    if (!values.email || !values.password) {
-      return;
-    }
-    const { password, email } = values;
-    onLogin({ password, email });
-  }
 
   return (
     <section className="login">
@@ -33,39 +23,29 @@ function Login({ onLogin, message }) {
         <Greeting text="Рады видеть!" loggedIn={loggedIn} />
       </div>
 
-      <form className="login__form" onSubmit={handleSubmit}>
-        <span className="login__input">E-mail</span>
-        <input
-          className="login__field login__field_email"
-          name="email"
-          type="email"
-          pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
-          required
-          autoComplete="off"
-          onChange={handleChange}
-          value={values.email || ""}
-          disabled={formSavedProcess ? true : false}
-        ></input>
-        <span className="login__input-error" id="email-error">
-          {errors.email}
-        </span>
-
-        <span className="login__input">Пароль</span>
-        <input
-          className="login__field login__field_password"
-          name="password"
-          type="password"
-          minLength="8"
-          required
-          autoComplete="off"
-          onChange={handleChange}
-          value={values.password || ""}
-          disabled={formSavedProcess ? true : false}
-        ></input>
-        <span className="login__input-error" id="email-error">
-          {errors.password}
-        </span>
-        <span className="login__input-error">{message}</span>
+      <Form name="login" onSubmit={handleSubmit} noValidate>
+        <Input
+                    auth
+                    id="email"
+                    label="E-mail"
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    value={values.email || ""}
+                    error={errors.email}
+                />
+                <Input 
+                auth id="password" 
+                label="Пароль" 
+                name="password" 
+                type="password" 
+                minLength="4"
+                placeholder="Пароль" 
+                onChange={handleChange} 
+                value={values.password || ""} 
+                error={errors.password}
+                />
         <FooterButton
           disabledButton={!isValid}
           buttonText="Войти"
@@ -74,7 +54,7 @@ function Login({ onLogin, message }) {
           href="/signup"
           name="login"
         />
-      </form>
+        </Form>
     </section>
   );
 }

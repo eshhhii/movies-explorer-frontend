@@ -59,6 +59,7 @@ function App() {
       } else {
           localStorage.removeItem("token");
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history]);
 
   function onRegister(name, email, password) {

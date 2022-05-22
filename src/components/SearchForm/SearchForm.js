@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./SearchForm.css";
-import FilterCheckBox from "../FilterCheckBox/FilterCheckBox";
+import FilterCheckBox from "../FilterCheckbox/FilterCheckbox";
 
 import { ENTER_KEYWORD } from "../../utils/constants";
 import { removeWhiteSpace } from "../../utils/utils";
@@ -30,6 +30,7 @@ const SearchForm = ({
 
   return (
     <section className="search">
+      <div className="search-wrapper">
       <form className="search__form" onSubmit={handleSubmit} noValidate>
         <div className="search__container">
           <input
@@ -43,13 +44,17 @@ const SearchForm = ({
             minLength="2"
             maxLength="200"
           ></input>
-          <p className="search__input_error">{errorMessage}</p>
           <button className="search__button" type="submit">
             Найти
           </button>
         </div>
       </form>
-      <FilterCheckBox handleToggle={handleToggle} />
+      {error && <span className="search__error">{error}</span>}
+        </div>
+        <FilterCheckBox i
+                isOn={isOn}
+                handleToggle={handleToggle}
+            />
       <div className="search__line"></div>
     </section>
   );

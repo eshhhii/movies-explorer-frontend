@@ -19,6 +19,7 @@
 
 .greeting__text_profile {
   text-align: center;
+  margin-bottom: 123px;
 }
 
 @media all and (max-width: 450px) {
@@ -29,5 +30,8 @@
   .greeting__text {
     margin-top: 50px;
     text-align: center;
+  }
+  .greeting__text_profile {
+    margin-bottom: 0;
   }
 }

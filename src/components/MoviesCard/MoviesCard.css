@@ -34,7 +34,6 @@
 }
 
 .moviescard__like {
-  background-image: url(../../images/unlike.svg);
   width: 14px;
   height: 12px;
   border: none;
@@ -49,7 +48,6 @@
 }
 
 .moviescard__like_active {
-  background-image: url(../../images/like_active.svg);
   width: 14px;
   height: 12px;
   border: none;

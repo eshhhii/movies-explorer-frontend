@@ -1,91 +1,50 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
-import Preloader from "../Preloader/Preloader";
-import {
-  MAX_CARDS_NUMBER,
-  MIN_CARDS_NUMBER,
-  ADD_MAX_CARDS_NUMBER,
-  ADD_MIN_CARDS_NUMBER,
-} from "../../utils/constants";
 
-function MoviesCardList(props) {
-  const movies = props.movies || [];
-  const size = window.innerWidth;
-  const [cardsArray, setCardsArray] = React.useState(0);
+import * as utils from "../../utils/utils";
 
-  const renderCards = React.useCallback(() => {
-    if (size > 768) {
-      setCardsArray(MAX_CARDS_NUMBER);
-    } else {
-      setCardsArray(MIN_CARDS_NUMBER);
-    }
-  }, [size]);
+const MoviesCardList = ({
+    cards,
+    buttonMore,
+    onClickMoreButton,
+    onCardClickButton,
+    movieSearchError, }) => {
+    const visibilityCards = cards.length > 0;
 
-  const handleAddCardClick = () => {
-    if (size > 1020) {
-      setCardsArray(cardsArray + ADD_MAX_CARDS_NUMBER);
-    } else {
-      setCardsArray(cardsArray + ADD_MIN_CARDS_NUMBER);
-    }
-  };
+    return (
+        <section className="list">
 
-  React.useEffect(() => renderCards(), [renderCards]);
+            {!visibilityCards && <p className="list__message">{movieSearchError}</p>}
 
-  React.useEffect(() => {
-    window.addEventListener("resize", renderCards);
-    return () => {
-      window.removeEventListener("resize", renderCards);
-    };
-  }, []);
+            {visibilityCards && (
+                <ul className="list__list">
+                    {cards.map((card) => (
+                        <MoviesCard
+                            key={utils.getMovieKey(card)}
+                            card={card}
+                            onCardClickButton={onCardClickButton}
+                        />
+                    ))}
+                </ul>
+            )}
 
-  return (
-    <section className="list">
-     {props.isLoading ? (
-        <Preloader />
-      ) : (
-        <>
-       {props.message && <p className="movies-message">{props.message}</p>}
-        <ul className="list__list">
-          {movies &&
-            movies.slice(0, cardsArray).map((movie) => {
-              if (props.savedMovies.find((elem) => elem.movieId === movie.id)) {
-                return (
-                  <MoviesCard
-                    card={movie}
-                    key={movie.id}
-                    onChangeLike={props.onMovieDelete}
-                   
-                  />
-                );
-              } else {
-                return (
-                  <MoviesCard
-                    card={movie}
-                    key={movie.id}
-                    onChangeLike={props.onMovieLike}
-                    
-                  />
-                );
-              }
-            })}
-        </ul>
-        {movies.length > cardsArray && (
-          <div className="list__container">
-            <button
-              className="list__button"
-              type="button"
-              onClick={handleAddCardClick}
-            >
-              Еще
-            </button>
-          </div>
-          )}
-        </>
-        )}
-    </section>
-  );
-}
+            {buttonMore && (
+                <div className="list__container">
+                    <button
+                        className="list__button"
+                        type="button"
+                        name="more"
+                        onClick={onClickMoreButton}
+                    >
+                        Ещё
+                    </button>
+                </div>
+
+            )}
+
+        </section>
+    );
+};
 
 export default MoviesCardList;

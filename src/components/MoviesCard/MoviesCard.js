@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import iconSaved from "../../images/like_active.svg";
 import iconDelete from "../../images/delete.svg";
 import iconUnsaved from "../../images/unlike.svg";
+import * as utils from "../../utils/utils";
 
 const MoviesCard = ({ card, onCardClickButton }) => {
 
@@ -27,7 +28,7 @@ const MoviesCard = ({ card, onCardClickButton }) => {
       <div className="moviescard__block">
         <div className="moviescard__wrapper">
           <h3 className="moviescard__title">{card.nameRU}</h3>
-          <p className="moviescard__duration">{getMovieDuration(card)}</p>
+          <p className="moviescard__duration">{utils.getMovieDuration(card)}</p>
         </div>
         <button
         className={`moviescard__like ${
@@ -50,7 +51,7 @@ const MoviesCard = ({ card, onCardClickButton }) => {
         >
           <img
             className="moviescard__image"
-            src={getCardImage(card)}
+            src={utils.getCardImage(card)}
             alt={card.nameRU}
           />
         </a>

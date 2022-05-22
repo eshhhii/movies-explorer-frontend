@@ -1,46 +1,61 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import React, { useState, useEffect } from "react";
+import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+
 import Header from "../Header/Header";
-import SearchForm from "../SearchForm/SearchForm";
-import SavedMoviesCardList from "../SavedMoviesCardList/SavedMoviesCardList";
 import Footer from "../Footer/Footer";
+import * as utils from "../../utils/utils";
 
-function SavedMovies({
-  isLoading,
-  onMovieDelete,
-  message,
-  savedMovies,
-  foundSavedMovies,
-  filterMovies,
-  searchSavedMovie,
-}) {
-  const [shortMovies, setShortMovies] = React.useState([]);
-  const [isOn, setIsOn] = React.useState(false);
-  let movies = foundSavedMovies.length > 0 ? foundSavedMovies : savedMovies;
-  if (message) {
-    movies = [];
-  }
+import { NOT_FOUND, NO_SAVED_MOVIES } from "../../utils/constants";
 
-  React.useEffect(() => {
-    if (isOn && !message) {
-      setShortMovies(filterMovies(movies));
-    }
-  }, [isOn, movies]);
-  return (
-    <>
-      <Header />
-      <section className="saved-movies">
-        <SearchForm searchMovie={searchSavedMovie} setIsOn={setIsOn} />
-        <SavedMoviesCardList
-          savedMovies={isOn ? shortMovies : movies}
-          isLoading={isLoading}
-          onMovieDelete={onMovieDelete}
-          message={message}
-        />
-      </section>
-      <Footer />
-    </>
-  );
+const SavedMovies = ({ savedMovies, onCardClickButton }) => {
+
+    const [searchValue, setSearchValue] = useState("");
+    const [isSwitchOn, setSwitchOn] = useState(false);
+    const [movies, setMovies] = useState(savedMovies);
+
+    const handleSearchSubmit = (value) => {
+        setSearchValue(value);
+    };
+
+    const handleToggleSwitch = () => {
+        setSwitchOn(!isSwitchOn);
+    };
+
+    useEffect(() => {
+
+        const moviesFound = utils.searchMovie(savedMovies, searchValue);
+        const moviesFiltered = utils.filterMovies(moviesFound, isSwitchOn);
+
+        setMovies(moviesFiltered);
+
+    }, [savedMovies, searchValue, isSwitchOn]);
+
+
+    return (
+        <>
+            <Header />
+
+            <section className="saved-movies">
+
+                <SearchForm
+                    onSearchSubmit={handleSearchSubmit}
+                    isOn={isSwitchOn}
+                    handleToggle={handleToggleSwitch}
+                />
+
+                <MoviesCardList
+                    cards={movies}
+                    isSavedMoviesPage={true}
+                    buttonMore={false}
+                    onCardClickButton={onCardClickButton}
+                    movieSearchError={savedMovies.length < 1 ? NO_SAVED_MOVIES : NOT_FOUND}
+                />
+
+            </section>
+            <Footer />
+        </>
+    );
 }
 
 export default SavedMovies;
