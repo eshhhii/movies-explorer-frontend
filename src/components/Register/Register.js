@@ -46,6 +46,8 @@ const Register = ({ onRegister }) => {
                     label="E-mail"
                     name="email"
                     type="email"
+                    required
+                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                     placeholder="Email"
                     onChange={handleChange}
                     value={values.email || ""}
@@ -59,6 +61,7 @@ const Register = ({ onRegister }) => {
                     name="password"
                     type="password"
                     minLength="4"
+                    required
                     placeholder="Введите пароль"
                     onChange={handleChange}
                     value={values.password || ""}

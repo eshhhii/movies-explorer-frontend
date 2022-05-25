@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Switch, Route, useHistory, useLocation } from "react-router-dom";
+import React from 'react';
+import { Switch, Route, useHistory, useLocation, Redirect} from "react-router-dom";
 
 import "./App.css";
 import NotFound from "../NotFound/NotFound";
@@ -26,24 +26,24 @@ import authError from "../../images/fail.png";
 
 function App() {
 
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = React.useState({});
 
-  const [loggedIn, setIsLoggedIn] = useState(false);
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [tooltipImage, setTooltipImage] = useState("");
-  const [message, setMessage] = useState("");
+  const [loggedIn, setIsLoggedIn] = React.useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [tooltipImage, setTooltipImage] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [savedMovies, setSavedMovies] = useState([]);
-  const [movieSearchError, setMovieSearchError] = useState("");
+  const [movies, setMovies] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [savedMovies, setSavedMovies] = React.useState([]);
+  const [movieSearchError, setMovieSearchError] = React.useState("");
 
   const history = useHistory();
 
   const location = useLocation();
   const path = location.pathname;
 
-  useEffect(() => {
+  React.useEffect(() => {
       const token = localStorage.getItem("token");
       if (token) {
           auth.checkToken(token)
@@ -108,11 +108,11 @@ function App() {
       history.push("/");
   }
 
-  function closeAllPopaps() {
+  function closeAllPopups() {
       setIsInfoTooltipOpen(false);
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
       if (loggedIn) {
 
           const token = localStorage.getItem("token");
@@ -179,7 +179,10 @@ function App() {
               setSavedMovies([savedMovie, ...savedMovies]);
           })
           .catch((err) => {
-              console.log(utils.getErrors(err));
+            setIsInfoTooltipOpen(true);
+            setTooltipImage(authError);
+            setMessage(utils.getErrors(err));
+            console.log(utils.getErrors(err));
           });
   }
 
@@ -199,7 +202,10 @@ function App() {
               setSavedMovies(newSavedMovies);
           })
           .catch((err) => {
-              console.log(utils.getErrors(err));
+            setIsInfoTooltipOpen(true);
+            setTooltipImage(authError);
+            setMessage(utils.getErrors(err));
+            console.log(utils.getErrors(err));
           });
   }
 
@@ -211,7 +217,7 @@ function App() {
       }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
       const allMovies = JSON.parse(localStorage.getItem("all-movies"));
 
       if (allMovies) {
@@ -247,12 +253,6 @@ function App() {
                       savedMovies={savedMovies}
                       onCardClickButton={handleCardClickButton}
                   ></ProtectedRoute>
-                  <Route path="/signup">
-                      <Register onRegister={onRegister} />
-                  </Route>
-                  <Route path="/signin">
-                      <Login onLogin={onLogin} />
-                  </Route>
                   <ProtectedRoute
                       path="/profile"
                       component={Profile}
@@ -260,13 +260,27 @@ function App() {
                       loggedIn={loggedIn}
                       onUpdate={handleUpdateUserInfo}
                   ></ProtectedRoute>
+                   <Route path="/signup">
+                  {loggedIn ? (
+                  <Redirect to="/movies" />
+                ) : (
+                      <Register onRegister={onRegister} />
+                )}
+                  </Route>
+                  <Route path="/signin">
+                  {loggedIn ? (
+                  <Redirect to="/movies" />
+                ) : (
+                      <Login onLogin={onLogin} />
+                )}
+                  </Route>
                   <Route path="*">
                       <NotFound />
                   </Route>
               </Switch>
               <InfoTooltip
                   isOpen={isInfoTooltipOpen}
-                  onClose={closeAllPopaps}
+                  onClose={closeAllPopups}
                   image={tooltipImage}
                   message={message}
               />

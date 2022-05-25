@@ -30,6 +30,7 @@ const Login = ({ onLogin }) => {
                     label="E-mail"
                     name="email"
                     type="email"
+                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                     placeholder="Email"
                     onChange={handleChange}
                     value={values.email || ""}
@@ -39,7 +40,7 @@ const Login = ({ onLogin }) => {
                 auth id="password" 
                 label="Пароль" 
                 name="password" 
-                type="password" 
+                type="password"
                 minLength="4"
                 placeholder="Пароль" 
                 onChange={handleChange} 

@@ -15,6 +15,7 @@ const Input = ({
     error,
     auth,
     editProfile,
+    pattern,
     disabled
 }) => {
 
@@ -35,6 +36,7 @@ const Input = ({
                             name={name}
                             type={type}
                             placeholder={placeholder}
+                            pattern={pattern}
                             minLength={minLength}
                             maxLength={maxLength}
                             onChange={onChange}
@@ -68,6 +70,7 @@ const Input = ({
                             value={value}
                             defaultValue={defaultValue}
                             error={error}
+                            pattern={pattern}
                             required
                             autoComplete="off"
                             disabled={disabled}

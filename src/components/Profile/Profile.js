@@ -67,8 +67,9 @@ function Profile({ onSignOut, onUpdate }) {
                     value={values.email || ""} 
                     error={errors.email} 
                     required 
+                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                     autoComplete="off"
-                     disabled={isDisabledInput} />
+                    disabled={isDisabledInput} />
 
                     <div className="profile__container">
                         {!visibleSubmitButton && (
