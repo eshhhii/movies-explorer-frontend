@@ -17,8 +17,8 @@ function Profile({ onSignOut, onUpdate }) {
     function handleSubmit(evt) {
         evt.preventDefault();
         onUpdate({
-            name: values.name || currentUser.name,
-            email: values.email || currentUser.email,
+            name: values.name,
+            email: values.email,
         });
 
         setVisibleSubmitButton(false);
@@ -50,7 +50,7 @@ function Profile({ onSignOut, onUpdate }) {
                         minLength="2"
                         maxLength="30"
                         onChange={handleChange}
-                        value={values.name || ""}
+                        value={values.name || currentUser.name}
                         error={errors.name}
                         required
                         autoComplete="off"
@@ -64,7 +64,7 @@ function Profile({ onSignOut, onUpdate }) {
                     type="email" 
                     placeholder="Почта" 
                     onChange={handleChange} 
-                    value={values.email || ""} 
+                    value={values.email || currentUser.email} 
                     error={errors.email} 
                     required 
                     pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
@@ -84,7 +84,14 @@ function Profile({ onSignOut, onUpdate }) {
                         )}
 
                         {visibleSubmitButton && (
-                            <button type="submit" className={`profile__button-submit ${!isValid ? "profile__button-submit_disabled" : ""}`} disabled={!isValid}>
+                            <button type="submit" className={`profile__button-submit 
+                            ${!isValid &&  "profile__button-submit_disabled"}
+                            ${
+                                values.email === currentUser.email &&
+                                values.name === currentUser.name &&
+                                "profile__button-submit_disabled"
+                            }`}
+                                disabled={!isValid}>
                                 Сохранить
                             </button>
                         )}
