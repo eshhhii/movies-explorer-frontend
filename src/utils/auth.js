@@ -1,5 +1,4 @@
-/*export const BASE_URL = "https://api.eshhhii-diploma.nomoredomains.rocks";*/
-export const BASE_URL = "http://localhost:3001";
+export const BASE_URL = "https://api.eshhhii-diploma.nomoredomains.rocks";
 
 const checkResponse = (res) => {
   if (res.ok) {

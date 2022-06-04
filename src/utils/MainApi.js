@@ -92,8 +92,7 @@ export default class Api {
 }
 
 export const mainApi = new Api({
-url: 'http://localhost:3001',
-  /*url: 'https://api.eshhhii-diploma.nomoredomains.rocks',*/
+url: 'https://api.eshhhii-diploma.nomoredomains.rocks',
   headers: {
       'Accept': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('token')}`,

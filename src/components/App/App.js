@@ -100,10 +100,6 @@ function App() {
 
   function onSignOut() {
       setIsLoggedIn(false);
-      /*
-      localStorage.removeItem("token");
-      localStorage.removeItem('current-user');
-      localStorage.removeItem('saved-movies');*/
       localStorage.clear();
       setCurrentUser({});
       setSavedMovies([]);

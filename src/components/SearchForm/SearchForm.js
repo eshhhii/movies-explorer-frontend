@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./SearchForm.css";
 import FilterCheckBox from "../FilterCheckbox/FilterCheckbox";
 
@@ -10,8 +10,8 @@ const SearchForm = ({
     isOn,
     handleToggle }) => {
 
-    const [value, setValue] = useState("");
-    const [error, setError] = useState("");
+    const [value, setValue] = React.useState("");
+    const [error, setError] = React.useState("");
 
     function handleChange(evt) {
         setValue(evt.target.value);

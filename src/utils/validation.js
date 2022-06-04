@@ -1,10 +1,10 @@
-import { useState } from "react";
+import React from "react";
 
 export const useValidation = () => {
 
-    const [values, setValues] = useState({});
-    const [errors, setErrors] = useState({});
-    const [isValid, setIsValid] = useState(false);
+    const [values, setValues] = React.useState({});
+    const [errors, setErrors] = React.useState({});
+    const [isValid, setIsValid] = React.useState(false);
 
     const handleChange = (evt) => {
 
