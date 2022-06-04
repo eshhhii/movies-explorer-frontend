@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -14,11 +14,11 @@ const Movies = ({
   onCardClickButton,
   movieSearchError,
 }) => {
-  const [searchValue, setSearchValue] = useState("");
-  const [isSwitchOn, setSwitchOn] = useState(false);
-  const [moviesCount, setMoviesCount] = useState(utils.getMoviesCount());
-  const [allMovies, setAllMovies] = useState([]);
-  const [currentMovies, setCurrentMovies] = useState([]);
+  const [searchValue, setSearchValue] = React.useState("");
+  const [isSwitchOn, setSwitchOn] = React.useState(false);
+  const [moviesCount, setMoviesCount] = React.useState(utils.getMoviesCount());
+  const [allMovies, setAllMovies] = React.useState([]);
+  const [currentMovies, setCurrentMovies] = React.useState([]);
 
   const handleSearchSubmit = (value) => {
       setSearchValue(value);
@@ -35,7 +35,7 @@ const Movies = ({
       setMoviesCount(moviesCount + utils.loadMovies());
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
 
       const moviesFound = utils.searchMovie(cards, searchValue);
       const moviesFiltered = utils.filterMovies(moviesFound, isSwitchOn);
@@ -45,7 +45,7 @@ const Movies = ({
 
   }, [cards, searchValue, isSwitchOn, moviesCount]);
 
-  useEffect(() => {
+  React.useEffect(() => {
 
       const handleResize = () => {
           setTimeout(() => {

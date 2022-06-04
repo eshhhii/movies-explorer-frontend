@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
@@ -10,9 +10,9 @@ import { NOT_FOUND, NO_SAVED_MOVIES } from "../../utils/constants";
 
 const SavedMovies = ({ savedMovies, onCardClickButton }) => {
 
-    const [searchValue, setSearchValue] = useState("");
-    const [isSwitchOn, setSwitchOn] = useState(false);
-    const [movies, setMovies] = useState(savedMovies);
+    const [searchValue, setSearchValue] = React.useState("");
+    const [isSwitchOn, setSwitchOn] = React.useState(false);
+    const [movies, setMovies] = React.useState(savedMovies);
 
     const handleSearchSubmit = (value) => {
         setSearchValue(value);
@@ -22,7 +22,7 @@ const SavedMovies = ({ savedMovies, onCardClickButton }) => {
         setSwitchOn(!isSwitchOn);
     };
 
-    useEffect(() => {
+    React.useEffect(() => {
 
         const moviesFound = utils.searchMovie(savedMovies, searchValue);
         const moviesFiltered = utils.filterMovies(moviesFound, isSwitchOn);

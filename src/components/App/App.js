@@ -100,9 +100,11 @@ function App() {
 
   function onSignOut() {
       setIsLoggedIn(false);
+      /*
       localStorage.removeItem("token");
       localStorage.removeItem('current-user');
-      localStorage.removeItem('saved-movies');
+      localStorage.removeItem('saved-movies');*/
+      localStorage.clear();
       setCurrentUser({});
       setSavedMovies([]);
       history.push("/");
@@ -122,7 +124,7 @@ function App() {
                   setCurrentUser(userData);
                   setSavedMovies(movies);
 
-                  localStorage.setItem("saved-movies", JSON.stringify(movies));
+                  localStorage.setItem("saved-movies", JSON.stringify(movies || []));
                   localStorage.setItem("current-user", JSON.stringify(userData));
 
               })
