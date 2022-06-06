@@ -1,52 +1,60 @@
 import React from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
+import iconSaved from "../../images/like_active.svg";
+import iconDelete from "../../images/delete.svg";
+import iconUnsaved from "../../images/unlike.svg";
+import * as utils from "../../utils/utils";
 
-function MoviesCard({ card }) {
-  const [isMovieSaved, setIsMovieSaved] = React.useState(false);
+const MoviesCard = ({ card, onCardClickButton }) => {
+
+
   const location = useLocation();
-  const moviePage = location.pathname === "/movies";
-  const savedMoviePage = location.pathname === "/saved-movies";
 
-  function handleMovieSave() {
-    setIsMovieSaved(!isMovieSaved);
+  const isSavedMoviesPage = location.pathname === "/saved-movies";
+  const isMoviesPage = location.pathname === "/movies";
+
+  const savedIcon = <img src={iconSaved} alt="Сохранено" />;
+  const deleteIcon = <img src={iconDelete} alt="Удалить" />;
+  const unsavedIcon = <img src={iconUnsaved} alt="Не сохранено" />;
+
+  function handleCardClickButton() {
+      onCardClickButton(card);
   }
 
-  function handleMovieDelete(evt) {
-    evt.target.closest(".moviescard").remove();
-  }
 
   return (
     <section className="moviescard">
       <div className="moviescard__block">
         <div className="moviescard__wrapper">
-          <h3 className="moviescard__title">{card.title}</h3>
-          <p className="moviescard__duration">{card.duration}</p>
+          <h3 className="moviescard__title">{card.nameRU}</h3>
+          <p className="moviescard__duration">{utils.getMovieDuration(card)}</p>
         </div>
-        {moviePage &&
-          (isMovieSaved ? (
-            <button
-              className="moviescard__like moviescard__like_active"
-              type="button"
-              onClick={handleMovieSave}
-            ></button>
-          ) : (
-            <button
-              className="moviescard__like"
-              type="button"
-              onClick={handleMovieSave}
-            ></button>
-          ))}
-        {savedMoviePage && (
-          <button
-            className="moviescard__like moviescard__like_delete"
-            type="button"
-            onClick={handleMovieDelete}
-          ></button>
-        )}
+        <button
+        className={`moviescard__like ${
+          card.isSaved && isMoviesPage ? "moviescard__like_active" : ""
+        }`}
+        type="button"
+        onClick={handleCardClickButton}
+      >
+        {isMoviesPage && card.isSaved && savedIcon}
+        {isMoviesPage && !card.isSaved && unsavedIcon}
+        {isSavedMoviesPage && deleteIcon}
+      </button>
       </div>
       <div className="moviescard__container">
-        <img className="moviescard__image" src={card.image} alt={card.title} />
+        <a
+          className="moviescard__link"
+          href={card.trailer || card.trailerLink}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            className="moviescard__image"
+            src={utils.getCardImage(card)}
+            alt={card.nameRU}
+          />
+        </a>
       </div>
     </section>
   );

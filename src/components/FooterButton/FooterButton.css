@@ -5,11 +5,11 @@
   width: 396px;
 }
 .footer-button_register {
-  margin: 76px auto 0;
+  margin: 134px auto 0;
 }
 
 .footer-button_login {
-  margin: 191px auto 0;
+  margin: 221px auto 0;
 }
 
 .footer-button__button {
@@ -28,6 +28,14 @@
 .footer-button__button:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+.footer-button__button_disabled {
+  background-color: #f8f8f8;
+  border: 1px solid #a0a0a0;
+  color: #000000;
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
 }
 
 .footer-button__paragraph {

@@ -1,77 +1,82 @@
 import React from "react";
 import "./Register.css";
 import Greeting from "../Greeting/Greeting";
+import Form from "../Form/Form";
+import Input from "../Input/Input";
 import FooterButton from "../FooterButton/FooterButton";
+import { useValidation } from "../../utils/validation";
 
-function Register({ onRegister }) {
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+const Register = ({ onRegister }) => {
 
-  function handleNameChange(e) {
-    setName(e.target.value);
-  }
+  const loggedIn = false;
+  const { values, errors, isValid, handleChange } = useValidation();
 
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
-
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    onRegister(name, email, password);
-  }
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      onRegister(values.name, values.email, values.password);
+  };
 
   return (
     <section className="register">
       <div className="register__block">
-        <Greeting text="Добро пожаловать!" />
+        <Greeting text="Добро пожаловать!" loggedIn={loggedIn} />
       </div>
 
-      <form className="register__form" onSubmit={handleSubmit}>
-        <span className="register__input">Имя</span>
-        <input
-          className="register__field register__field_name"
-          name="name"
-          type="text"
-          autoComplete="off"
-          minLength="2"
-          maxLength="40"
-          onSubmit={handleNameChange}
-          required
-        ></input>
-        <span className="register__input">E-mail</span>
-        <input
-          className="register__field register__field_email"
-          name="email"
-          type="email"
-          pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
-          required
-          autoComplete="off"
-          onSubmit={handleEmailChange}
-        ></input>
+      <Form
+                name="register"
+                onSubmit={handleSubmit}
+                noValidate
+            >
+                <Input
+                    auth
+                    id="name"
+                    label="Имя"
+                    name="name"
+                    type="text"
+                    placeholder="Имя"
+                    minLength="2"
+                    maxLength="30"
+                    onChange={handleChange}
+                    value={values.name || ""}
+                    error={errors.name}
+                />
+                <Input
+                    auth
+                    id="email"
+                    label="E-mail"
+                    name="email"
+                    type="email"
+                    required
+                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    value={values.email || ""}
+                    error={errors.email}
+                />
 
-        <span className="register__input">Пароль</span>
-        <input
-          className="register__field register__field_password"
-          name="password"
-          type="password"
-          minLength="6"
-          required
-          autoComplete="off"
-          onSubmit={handlePasswordChange}
-        ></input>
+                <Input
+                    auth
+                    id="password"
+                    label="Пароль"
+                    name="password"
+                    type="password"
+                    minLength="4"
+                    required
+                    placeholder="Введите пароль"
+                    onChange={handleChange}
+                    value={values.password || ""}
+                    error={errors.password}
+                />
+              
         <FooterButton
+          disabledButton={!isValid}
           buttonText="Зарегистрироваться"
           paragraph="Уже зарегистрированы?"
           linkText="Войти"
           href="/signin"
           name="register"
         />
-      </form>
+      </Form>
     </section>
   );
 }

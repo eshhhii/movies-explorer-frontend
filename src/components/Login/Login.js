@@ -1,61 +1,61 @@
 import React from "react";
 import "./Login.css";
 import Greeting from "../Greeting/Greeting";
+import Form from "../Form/Form";
+import Input from "../Input/Input";
 import FooterButton from "../FooterButton/FooterButton";
+import { useValidation } from "../../utils/validation";
 
-function Login({ onLogin }) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+const Login = ({ onLogin }) => {
 
-  function handleEmailSubmit(e) {
-    setEmail(e.target.value);
-  }
+  const loggedIn = false;
+  const { values, errors, isValid, handleChange } = useValidation();
 
-  function handlePasswordSubmit(e) {
-    setPassword(e.target.value);
-  }
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      onLogin(values.email, values.password);
+  };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    onLogin(email, password);
-  }
 
   return (
     <section className="login">
       <div className="login__block">
-        <Greeting text="Рады видеть!" />
+        <Greeting text="Рады видеть!" loggedIn={loggedIn} />
       </div>
 
-      <form className="login__form" onSubmit={handleSubmit}>
-        <span className="login__input">E-mail</span>
-        <input
-          className="login__field login__field_email"
-          name="email"
-          type="email"
-          pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$"
-          required
-          autoComplete="off"
-          onSubmit={handleEmailSubmit}
-        ></input>
-
-        <span className="login__input">Пароль</span>
-        <input
-          className="login__field login__field_password"
-          name="password"
-          type="password"
-          minLength="6"
-          required
-          autoComplete="off"
-          onSubmit={handlePasswordSubmit}
-        ></input>
+      <Form name="login" onSubmit={handleSubmit} noValidate>
+        <Input
+                    auth
+                    id="email"
+                    label="E-mail"
+                    name="email"
+                    type="email"
+                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    value={values.email || ""}
+                    error={errors.email}
+                />
+                <Input 
+                auth id="password" 
+                label="Пароль" 
+                name="password" 
+                type="password"
+                minLength="4"
+                placeholder="Пароль" 
+                onChange={handleChange} 
+                value={values.password || ""} 
+                error={errors.password}
+                />
         <FooterButton
+          disabledButton={!isValid}
           buttonText="Войти"
           paragraph="Еще не зарегистрированы?"
           linkText="Регистрация"
           href="/signup"
           name="login"
         />
-      </form>
+        </Form>
     </section>
   );
 }

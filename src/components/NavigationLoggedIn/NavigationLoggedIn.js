@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./NavigationLoggedIn.css";
 
 function NavigationLoggedIn() {
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = React.useState(false);
   const toggleMenu = () => setMenu(!menu);
 
   return (
