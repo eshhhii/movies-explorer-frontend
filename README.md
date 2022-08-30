@@ -1,4 +1,4 @@
-# movies-explorer-frontend
+# movies-explorer-frontend.  https://eshhhii.github.io/movies-explorer-frontend/
 
 **Репозиторий для фронтенда дипломного проекта `Movies-explorer`, включающий часть приложения со следующими возможностями:**  
 1. Авторизации и регистрации пользователей.
